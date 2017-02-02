@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorBeing : MonoBehaviour {
+public class ColorBeing : ColorObject {
 
 	public const float MAX_HUE_DIF_TO_HEAL = 0.15f;
 	/// <summary>
@@ -11,18 +11,10 @@ public class ColorBeing : MonoBehaviour {
 	/// </summary>
 	public const float HEAL_FACTOR = 0.2f;
 
-	public Color color;
-
-	float hue
-	{
-		get
-		{
-			return color.GetHue();
-		}
-	}
-
 	public int maxHealth = 10;
-	int health;
+	public int health { get; protected set; }
+
+	public bool isDead { get { return (health <= 0); } }
 
 	void Awake()
 	{
@@ -31,27 +23,40 @@ public class ColorBeing : MonoBehaviour {
 
 	void Update()
 	{
-		BeShot(Color.blue, 10f);
+//		BeShot(Color.blue, 10f);
 	}
 
 	public void BeShot (Color c, float force) 
 	{
 		float hue = c.GetHue();
 		float hueDif = ColorUtils.GetHueDif(this.hue, hue);
-		Debug.LogFormat("hue dif = {0}", hueDif);
-		float damage = CalculateDamage(hueDif, force);
-		Debug.LogFormat("shot by damage = {0}", damage);
+//		Debug.LogFormat("hue dif = {0}", hueDif);
+		int damage = CalculateDamage(hueDif, force);
+		health = health - damage;
+		health = Mathf.Min(health, maxHealth);
+		Debug.LogFormat("{0} shot by damage: {1}, leftHealth: {2}", name, damage, health);
+		if (health <= 0)
+			Die();
 	}
 
-	public static float CalculateDamage(float hueDif, float force)
+	void Die()
 	{
-//		float multiplier = (hueDif - MAX_HUE_DIF_TO_HEAL) * (1f / (0.5f - MAX_HUE_DIF_TO_HEAL));
+		Debug.LogFormat("{0} dead", name);
+		foreach(SpriteRenderer sr in GetComponentsInChildren<SpriteRenderer>(true))
+			sr.color = sr.color.LowerAlpha(0.6f);
+	}
+
+	public static int CalculateDamage(float hueDif, float force)
+	{
 		float multiplier = hueDif - MAX_HUE_DIF_TO_HEAL;
 		if (multiplier < 0f)
 			multiplier *= (1f / MAX_HUE_DIF_TO_HEAL) * HEAL_FACTOR;
 		else
 			multiplier *= (1f / (0.5f - MAX_HUE_DIF_TO_HEAL));
-		return force * multiplier;
+		if (force * multiplier > 0f)
+			return Mathf.CeilToInt(force * multiplier);
+		else
+			return Mathf.FloorToInt(force * multiplier);
 	}
 
 }

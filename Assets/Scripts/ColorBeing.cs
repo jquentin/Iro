@@ -21,8 +21,9 @@ public class ColorBeing : ColorObject {
 		health = maxHealth;
 	}
 
-	void Update()
+	protected override void Update()
 	{
+		base.Update();
 //		BeShot(Color.blue, 10f);
 	}
 

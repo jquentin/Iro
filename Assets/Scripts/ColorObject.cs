@@ -16,12 +16,12 @@ public class ColorObject : MonoBehaviour {
 
 	Color lastColor;
 
-	void Start()
+	protected virtual void Start()
 	{
 		UpdateColorSprites();
 	}
 
-	void Update()
+	protected virtual void Update()
 	{
 		if (color != lastColor)
 			UpdateColorSprites();

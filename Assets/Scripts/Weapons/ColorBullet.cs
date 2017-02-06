@@ -16,4 +16,10 @@ public class ColorBullet : ColorObject {
 		}
 	}
 
+	public void Shoot(float angle, float speed)
+	{
+		float radAngle = Mathf.Deg2Rad * angle;
+		GetComponent<Rigidbody2D>().velocity = speed * new Vector2(Mathf.Cos(radAngle), Mathf.Sin(radAngle));
+	}
+
 }

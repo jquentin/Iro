@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IroCharacterController : MonoBehaviour {
-
-	public Transform body;
+public class IroCharacterController : CharacterController {
 
 	public float moveSpeed = 1f;
 
@@ -25,6 +23,12 @@ public class IroCharacterController : MonoBehaviour {
 		}
 		Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		worldMousePos.z = 0f;
-		body.LookAt(worldMousePos, Vector3.back);
+		Vector2 dif = worldMousePos - transform.position;
+		angle = SignedAngle(dif);
+	}
+
+	public static float SignedAngle(Vector2 vector)
+	{
+		return Vector2.Angle(Vector2.right, vector) * ((vector.y >= 0f) ? 1f : -1f);
 	}
 }

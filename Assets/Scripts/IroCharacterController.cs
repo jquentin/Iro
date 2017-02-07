@@ -8,18 +8,31 @@ public class IroCharacterController : CharacterController {
 
 	bool isMoving;
 
-	void Update () 
+	Rigidbody2D _rigidbody;
+	Rigidbody2D rigidbody
+	{
+		get
+		{
+			if (_rigidbody == null)
+				_rigidbody = GetComponent<Rigidbody2D>();
+			return _rigidbody;
+		}
+	}
+
+	void FixedUpdate () 
 	{
 		float vertical = Input.GetAxis("Vertical");
 		float horizontal = Input.GetAxis("Horizontal");
+		rigidbody.velocity = new Vector2(moveSpeed * horizontal, moveSpeed * vertical);
 		if (vertical != 0f || horizontal != 0f)
 		{
-			transform.Translate(new Vector3(moveSpeed * horizontal, moveSpeed * vertical));
+//			transform.Translate(new Vector3(moveSpeed * horizontal, moveSpeed * vertical));
 			isMoving = true;
 		}
 		else
 		{
 			isMoving = false;
+			rigidbody.angularVelocity = 0f;
 		}
 		Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		worldMousePos.z = 0f;

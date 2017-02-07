@@ -8,10 +8,11 @@ public class ColorBullet : ColorObject {
 
 	void OnTriggerEnter2D (Collider2D other) 
 	{
-		ColorBeing being = other.GetComponentInParent<ColorBeing>();
-		if (being != null && !being.isDead)
+		Shootable shootable = other.GetComponentInParent<Shootable>();
+		ColorBeing being = shootable as ColorBeing;
+		if (shootable != null && (being == null || !being.isDead))
 		{
-			being.BeShot(color, force);
+			shootable.BeShot(color, force);
 			Destroy(gameObject);
 		}
 	}

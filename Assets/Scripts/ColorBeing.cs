@@ -58,6 +58,8 @@ public class ColorBeing : ColorObject, Shootable {
 		Debug.LogFormat("{0} dead", name);
 		foreach(SpriteRenderer sr in GetComponentsInChildren<SpriteRenderer>(true))
 			sr.color = sr.color.LowerAlpha(0.6f);
+		foreach(Collider2D c in GetComponentsInChildren<Collider2D>(true))
+			c.enabled = false;
 	}
 
 	static float CalculateHitFactor(float hueDif)

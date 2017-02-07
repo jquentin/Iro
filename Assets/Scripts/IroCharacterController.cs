@@ -8,17 +8,6 @@ public class IroCharacterController : CharacterController {
 
 	bool isMoving;
 
-	Rigidbody2D _rigidbody;
-	Rigidbody2D rigidbody
-	{
-		get
-		{
-			if (_rigidbody == null)
-				_rigidbody = GetComponent<Rigidbody2D>();
-			return _rigidbody;
-		}
-	}
-
 	void FixedUpdate () 
 	{
 		float vertical = Input.GetAxis("Vertical");

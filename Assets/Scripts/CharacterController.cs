@@ -6,6 +6,17 @@ public class CharacterController : MonoBehaviour {
 
 	public Transform body;
 
+	Rigidbody2D _rigidbody;
+	protected Rigidbody2D rigidbody
+	{
+		get
+		{
+			if (_rigidbody == null)
+				_rigidbody = GetComponent<Rigidbody2D>();
+			return _rigidbody;
+		}
+	}
+
 	float _angle;
 	public float angle
 	{

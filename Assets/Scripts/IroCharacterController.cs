@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class IroCharacterController : CharacterController {
 
-	public float moveSpeed = 1f;
-
 	bool isMoving;
 
 	void FixedUpdate () 

@@ -6,7 +6,7 @@ public class ControllableColorBeing : ColorBeing {
 
 	public float colorWheelSpeed = 1f;
 
-	public ColorWheel _colorWheel;
+	ColorWheel _colorWheel;
 	public ColorWheel colorWheel
 	{
 		get

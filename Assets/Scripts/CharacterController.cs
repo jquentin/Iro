@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour {
 
+	public float moveSpeed = 1f;
+
 	public Transform body;
 
 	Rigidbody2D _rigidbody;

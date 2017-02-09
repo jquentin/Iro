@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorObject : MonoBehaviour {
+public class ColorObject : TigglyMonoBehaviour {
 
 	public Color color;
 

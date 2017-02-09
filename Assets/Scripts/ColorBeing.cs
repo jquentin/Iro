@@ -27,7 +27,7 @@ public class ColorBeing : ColorObject, Shootable {
 		}
 	}
 
-	void Awake()
+	void Start()
 	{
 		health = maxHealth;
 	}

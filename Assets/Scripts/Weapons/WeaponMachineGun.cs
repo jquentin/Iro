@@ -6,6 +6,8 @@ public class WeaponMachineGun : WeaponGun {
 
 	public float timeBetweenShots = 0.2f;
 
+	public float angleVariation = 2f;
+
 	float lastShotTime = float.MinValue;
 
 	protected override void Update()
@@ -14,7 +16,7 @@ public class WeaponMachineGun : WeaponGun {
 		{
 			if (Time.time - lastShotTime > timeBetweenShots)
 			{
-				Shoot();
+				Shoot(Random.Range(-angleVariation, angleVariation));
 				lastShotTime = Time.time;
 			}
 		}

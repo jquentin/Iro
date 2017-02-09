@@ -9,8 +9,6 @@ public class ColorMissile : ColorObject {
 	public float timeToTarget = 1f;
 	public float explodeRadius = 1f;
 
-	public List<AudioClip> explodeSound;
-
 	Vector3 initScale;
 
 	public Explosion explosionPrefab;
@@ -59,7 +57,6 @@ public class ColorMissile : ColorObject {
 
 	void Explode()
 	{
-		audioSource.PlayOneShotControlled(explodeSound, AudioType.Sound);
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explodeRadius);
 		Explosion.CreateExplosion(explosionPrefab, transform.position, 4f, color);
 		foreach(Collider2D collider in colliders)

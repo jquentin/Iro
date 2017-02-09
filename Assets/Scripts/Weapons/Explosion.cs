@@ -5,8 +5,11 @@ using UnityEngine;
 public class Explosion : ColorObject 
 {
 
+	public List<AudioClip> explodeSound;
+
 	void Init(float scale, Color color)
 	{
+		audioSource.PlayOneShotControlled(explodeSound, AudioType.Sound);
 		this.color = color;
 		iTween.ScaleTo(gameObject, iTween.Hash(
 			"scale", transform.localScale * scale,

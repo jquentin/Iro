@@ -7,4 +7,5 @@ public class WeaponManager : ResourcePrefabMonoSingleton<WeaponManager> {
 
 	public List<Weapon> weaponPrefabs;
 
+
 }

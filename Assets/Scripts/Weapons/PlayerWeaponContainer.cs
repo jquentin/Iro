@@ -4,25 +4,17 @@ using UnityEngine;
 
 public class PlayerWeaponContainer : WeaponContainer {
 
-	void Start () 
-	{
-		SetWeapon(0);
-	}
+	readonly List<KeyCode> keys = new List<KeyCode>(){KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5};
 
 	void Update () 
 	{
-		if (Input.GetKeyDown(KeyCode.Alpha1))
-			SetWeapon(0);
-		else if (Input.GetKeyDown(KeyCode.Alpha2))
-			SetWeapon(1);
-		else if (Input.GetKeyDown(KeyCode.Alpha3))
-			SetWeapon(2);
-		else if (Input.GetKeyDown(KeyCode.Alpha4))
-			SetWeapon(3);
-		else if (Input.GetKeyDown(KeyCode.Alpha5))
-			SetWeapon(4);
-		else if (Input.GetKeyDown(KeyCode.Alpha6))
-			SetWeapon(5);
+		if (!isLocalPlayer)
+			return;
+		for (int i = 0 ; i < keys.Count ; i++)
+		{
+			if (Input.GetKeyDown(keys[i]))
+				CmdSetWeapon(i);
+		}
 	}
 
 }

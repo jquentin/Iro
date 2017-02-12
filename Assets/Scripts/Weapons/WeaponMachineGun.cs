@@ -16,7 +16,7 @@ public class WeaponMachineGun : WeaponGun {
 		{
 			if (Time.time - lastShotTime > timeBetweenShots)
 			{
-				Shoot(Random.Range(-angleVariation, angleVariation));
+				CmdShoot(Random.Range(-angleVariation, angleVariation));
 				lastShotTime = Time.time;
 			}
 		}

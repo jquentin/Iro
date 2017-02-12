@@ -15,7 +15,7 @@ public class WeaponMissileLauncher : Weapon {
 
 	bool isReadyToShoot = true;
 
-	protected override void Shoot ()
+	protected override void CmdShoot ()
 	{
 		Shoot(Vector2.zero);
 	}

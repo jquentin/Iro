@@ -1,19 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public abstract class WeaponContainer : MonoBehaviour {
+public abstract class WeaponContainer : TigglyNetworkBehaviour {
 
-	int currentWeaponIndex;
+	public List<Weapon> weaponComponents;
+
+	[SyncVar(hook="OnChangeWeapon")]
+	public int currentWeaponIndex;
 	Weapon currentWeapon;
 
-	protected void SetWeapon(int index)
+	void Start () 
 	{
-		if (currentWeapon != null)
-			Destroy(currentWeapon.gameObject);
-		currentWeapon = Instantiate(WeaponManager.instance.weaponPrefabs[index], this.transform);
-		currentWeapon.transform.localPosition = Vector3.zero;
-		currentWeapon.transform.localRotation = Quaternion.identity;
+		OnChangeWeapon(currentWeaponIndex);
+	}
+
+	[Command]
+	protected void CmdSetWeapon(int index)
+	{
+		Debug.Log("CmdSetWeapon");
+//		for (int i = 0 ; i < weaponComponents.Count ; i++)
+//		{
+//			weaponComponents[i].enabled = (index == i);
+//		}
 		currentWeaponIndex = index;
+	}
+
+	void OnChangeWeapon(int weaponIndex)
+	{
+		Debug.Log("OnChangeWeapon");
+		for (int i = 0 ; i < weaponComponents.Count ; i++)
+		{
+			weaponComponents[i].enabled = (weaponIndex == i);
+		}
 	}
 }

@@ -8,6 +8,9 @@ public class IroCharacterController : CharacterController {
 
 	void FixedUpdate () 
 	{
+		if (!isLocalPlayer)
+			return;
+		
 		float vertical = Input.GetAxis("Vertical");
 		float horizontal = Input.GetAxis("Horizontal");
 		rigidbody.velocity = new Vector2(moveSpeed * horizontal, moveSpeed * vertical);

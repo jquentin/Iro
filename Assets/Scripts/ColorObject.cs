@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class ColorObject : TigglyMonoBehaviour {
+public class ColorObject : TigglyNetworkBehaviour {
 
+	[SyncVar]
 	public Color color;
 
 	protected float hue

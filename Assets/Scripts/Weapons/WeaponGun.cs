@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class WeaponGun : Weapon {
 
@@ -8,28 +9,36 @@ public class WeaponGun : Weapon {
 
 	public Transform gunEnd;
 
+	public List<AudioClip> shootSound;
+
 	public ColorBullet bulletPrefab;
 
-	protected override void Shoot ()
+	protected override void CmdShoot ()
 	{
-		Shoot(0f);
+		CmdShoot(0f);
 	}
 
-	protected void Shoot (float angleShift)
+	[Command]
+	protected void CmdShoot (float angleShift)
 	{
+		audioSource.PlayOneShotControlled(shootSound, AudioType.Sound);
 		ColorBullet bullet = Instantiate(bulletPrefab, gunEnd);
 		bullet.color = this.color;
 		bullet.transform.localPosition = Vector3.zero;
 		bullet.transform.localRotation = bulletPrefab.transform.localRotation;
 		bullet.transform.parent = null;
-		bullet.Shoot(GetComponentInParent<IroCharacterController>().angle + angleShift, bulletSpeed);
+		IroCharacterController cc = GetComponentInParent<IroCharacterController>();
+		bullet.Shoot(cc.angle + angleShift, bulletSpeed);
+		NetworkServer.Spawn(bullet.gameObject);
 	}
 
 	protected virtual void Update()
 	{
+		if (!isLocalPlayer)
+			return;
 		if (Input.GetMouseButtonDown(0))
 		{
-			Shoot();
+			CmdShoot();
 		}
 	}
 

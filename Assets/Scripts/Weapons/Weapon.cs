@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Weapon : TigglyMonoBehaviour {
+public abstract class Weapon : TigglyNetworkBehaviour {
 
 	ControllableColorBeing _owner;
 	ControllableColorBeing owner
@@ -23,6 +23,6 @@ public abstract class Weapon : TigglyMonoBehaviour {
 		}
 	}
 
-	protected abstract void Shoot();
+	protected abstract void CmdShoot();
 
 }

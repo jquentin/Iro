@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class CharacterController : MonoBehaviour {
+public class CharacterController : NetworkBehaviour {
 
 	public float moveSpeed = 1f;
 
@@ -19,17 +20,15 @@ public class CharacterController : MonoBehaviour {
 		}
 	}
 
-	float _angle;
 	public float angle
 	{
 		get
 		{
-			return _angle;
+			return body.eulerAngles.z - 90f;
 		}
 		protected set
 		{
-			_angle = value;
-			body.eulerAngles = Vector3.back * (-angle - 90f);
+			body.eulerAngles = Vector3.back * (-value - 90f);
 		}
 	}
 

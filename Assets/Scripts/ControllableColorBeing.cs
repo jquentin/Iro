@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class ControllableColorBeing : ColorBeing {
 
@@ -23,7 +24,8 @@ public class ControllableColorBeing : ColorBeing {
 		CloseColorWheel();
 	}
 
-	void ChangeHue(float value)
+	[Command]
+	void CmdChangeHue(float value)
 	{
 		float h, s, v;
 		Color.RGBToHSV(this.color, out h, out s, out v);
@@ -35,12 +37,14 @@ public class ControllableColorBeing : ColorBeing {
 	protected override void Update()
 	{
 		base.Update();
+		if (!isLocalPlayer)
+			return;
 		float mouseWheel = Input.GetAxis("Mouse ScrollWheel");
 		if (mouseWheel != 0f)
 		{
 			if (!colorWheel.isShowing)
 				colorWheel.Show();
-			ChangeHue(colorWheelSpeed * mouseWheel);
+			CmdChangeHue(colorWheelSpeed * mouseWheel);
 			this.AddTimeout(0.4f, HueIsStill, CloseColorWheel, true);
 		}
 		hueIsChanging = (mouseWheel != 0f);

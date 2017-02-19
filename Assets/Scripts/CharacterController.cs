@@ -20,6 +20,17 @@ public class CharacterController : NetworkBehaviour {
 		}
 	}
 
+	ColorBeing _owner;
+	protected ColorBeing owner
+	{
+		get
+		{
+			if (_owner == null)
+				_owner = GetComponent<ColorBeing>();
+			return _owner;
+		}
+	}
+
 	public float angle
 	{
 		get

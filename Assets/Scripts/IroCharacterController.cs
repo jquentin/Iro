@@ -8,7 +8,7 @@ public class IroCharacterController : CharacterController {
 
 	void FixedUpdate () 
 	{
-		if (!isLocalPlayer)
+		if (!isLocalPlayer || owner.isDead)
 			return;
 		
 		float vertical = Input.GetAxis("Vertical");

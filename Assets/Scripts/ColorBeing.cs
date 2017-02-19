@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -56,6 +56,7 @@ public class ColorBeing : ColorObject, Shootable {
 
 	void OnHealthChanged(int health)
 	{
+		this.health = health;
 		if (health <= 0)
 			Die();
 	}

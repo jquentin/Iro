@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -17,17 +17,6 @@ public class ColorMissile : ColorObject {
 	void Awake()
 	{
 		initScale = transform.localScale;
-	}
-
-	void OnTriggerEnter2D (Collider2D other) 
-	{
-		Shootable shootable = other.GetComponentInParent<Shootable>();
-		ColorBeing being = shootable as ColorBeing;
-		if (shootable != null && (being == null || !being.isDead))
-		{
-			shootable.BeShot(color, force);
-			Destroy(gameObject);
-		}
 	}
 
 	public void Shoot(Vector2 target)

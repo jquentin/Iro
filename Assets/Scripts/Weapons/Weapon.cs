@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Weapon : TigglyNetworkBehaviour {
 
 	ControllableColorBeing _owner;
-	ControllableColorBeing owner
+	protected ControllableColorBeing owner
 	{
 		get
 		{

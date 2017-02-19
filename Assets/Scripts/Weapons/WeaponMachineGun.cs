@@ -12,6 +12,8 @@ public class WeaponMachineGun : WeaponGun {
 
 	protected override void Update()
 	{
+		if (!isLocalPlayer || owner.isDead)
+			return;
 		if (Input.GetMouseButton(0))
 		{
 			if (Time.time - lastShotTime > timeBetweenShots)

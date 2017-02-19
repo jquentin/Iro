@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class ColorMissile : ColorObject {
 
@@ -35,10 +36,11 @@ public class ColorMissile : ColorObject {
 		float speed = (target - pos).magnitude / timeToTarget;
 		GetComponent<Rigidbody2D>().velocity = speed * (target - pos).normalized;
 		Invoke("Explode", timeToTarget);
-		GoUp();
+		RpcGoUp();
 	}
 
-	void GoUp()
+	[ClientRpc]
+	void RpcGoUp()
 	{
 		iTween.ScaleTo(gameObject, iTween.Hash(
 			"scale", 2.5f * initScale,

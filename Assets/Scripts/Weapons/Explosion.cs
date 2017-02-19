@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class Explosion : ColorObject 
 {
 
 	public List<AudioClip> explodeSound;
 
-	void Init(float scale, Color color)
+	[ClientRpc]
+	void RpcInit(float scale, Color color)
 	{
 		audioSource.PlayOneShotControlled(explodeSound, AudioType.Sound);
 		this.color = color;
@@ -20,7 +22,8 @@ public class Explosion : ColorObject
 	public static void CreateExplosion(Explosion explosionPrefab, Vector2 pos, float scale, Color color)
 	{
 		Explosion explosion = Instantiate(explosionPrefab, pos, Quaternion.identity);
-		explosion.Init(scale, color);
+		NetworkServer.Spawn(explosion.gameObject);
+		explosion.RpcInit(scale, color);
 	}
 
 }

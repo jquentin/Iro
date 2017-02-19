@@ -21,7 +21,7 @@ public class WeaponGun : Weapon {
 	[Command]
 	protected void CmdShoot (float angleShift)
 	{
-		audioSource.PlayOneShotControlled(shootSound, AudioType.Sound);
+		RpcPlayShootSound();
 		ColorBullet bullet = Instantiate(bulletPrefab, gunEnd);
 		bullet.color = this.color;
 		bullet.transform.localPosition = Vector3.zero;
@@ -32,9 +32,15 @@ public class WeaponGun : Weapon {
 		NetworkServer.Spawn(bullet.gameObject);
 	}
 
+	[ClientRpc]
+	void RpcPlayShootSound()
+	{
+		audioSource.PlayOneShotControlled(shootSound, AudioType.Sound);
+	}
+
 	protected virtual void Update()
 	{
-		if (!isLocalPlayer)
+		if (!isLocalPlayer || owner.isDead)
 			return;
 		if (Input.GetMouseButtonDown(0))
 		{

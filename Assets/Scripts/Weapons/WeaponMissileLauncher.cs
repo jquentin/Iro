@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class WeaponMissileLauncher : Weapon {
 
@@ -17,22 +18,32 @@ public class WeaponMissileLauncher : Weapon {
 
 	protected override void CmdShoot ()
 	{
-		Shoot(Vector2.zero);
+		CmdShoot(Vector2.zero);
 	}
 
-	protected void Shoot (Vector2 target)
+	[Command]
+	protected void CmdShoot (Vector2 target)
 	{
-		audioSource.PlayOneShotControlled(missileSound, AudioType.Sound);
+		RpcPlayMissileSound();
 		ColorMissile missile = Instantiate(missilePrefab, gunEnd);
 		missile.color = this.color;
 		missile.transform.localPosition = Vector3.zero;
 		missile.transform.localRotation = missilePrefab.transform.localRotation;
 		missile.transform.parent = null;
+		NetworkServer.Spawn(missile.gameObject);
 		missile.Shoot(target);
+	}
+
+	[ClientRpc]
+	void RpcPlayMissileSound()
+	{
+		audioSource.PlayOneShotControlled(missileSound, AudioType.Sound);
 	}
 
 	protected virtual void Update()
 	{
+		if (!isLocalPlayer || owner.isDead)
+			return;
 		if (Input.GetMouseButtonDown(0))
 		{
 			if (!isReadyToShoot)
@@ -41,7 +52,7 @@ public class WeaponMissileLauncher : Weapon {
 				return;
 			}
 			Vector2 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			Shoot(target);
+			CmdShoot(target);
 			isReadyToShoot = false;
 			Invoke("Reload", timeToReload);
 		}

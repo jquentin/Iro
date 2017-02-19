@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class ColorObject : TigglyNetworkBehaviour {
 
-	[SyncVar]
+	[SyncVar(hook="OnColorChanged")]
 	public Color color;
 
 	protected float hue
@@ -29,11 +29,17 @@ public class ColorObject : TigglyNetworkBehaviour {
 			UpdateColorSprites();
 	}
 
-	void UpdateColorSprites()
+	public void UpdateColorSprites()
 	{
 		foreach(ColorSprite cs in GetComponentsInChildren<ColorSprite>(true))
 			cs.UpdateColor(color);
 		lastColor = color;
+	}
+
+	void OnColorChanged(Color color)
+	{
+		this.color = color;
+		UpdateColorSprites();
 	}
 
 }

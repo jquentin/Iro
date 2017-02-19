@@ -1,10 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class CharacterBuilder : MonoBehaviour {
+public class CharacterBuilder : NetworkBehaviour {
 
 	public bool isPlayable;
+
+	public Transform bodyContainer;
+	public List<GameObject> bodies;
+
+	GameObject instantiatedBody;
+
+	[SyncVar]
+	public int selectedBodyIndex = -1;
+
+	static int chosenColors = 0;
 
 	void Awake () 
 	{
@@ -27,4 +38,59 @@ public class CharacterBuilder : MonoBehaviour {
 			Destroy(weaponContainer);
 		}
 	}
+
+	void Start()
+	{
+		if (isLocalPlayer)
+		{
+			CmdSelectBody();
+			CmdSelectColor();
+		}
+//		else
+//		{
+//			SpawnBody(selectedBodyIndex);
+//		}
+	}
+
+	[Command]
+	void CmdSelectBody()
+	{
+		RandomExhaustInt chosenBodies = new RandomExhaustInt(0, bodies.Count - 1, ExclusionMode.FixedRandomizedElmts, 1, "ChosenBodies", bodies.Count);
+		selectedBodyIndex = chosenBodies.Pick();
+//		RpcSpawnBody(selectedBodyIndex);
+	}
+	[Command]
+	void CmdSelectColor()
+	{
+		Color color = Color.HSVToRGB(0.25f * chosenColors, 1f, 1f);
+		chosenColors = (chosenColors + 1) % 4;
+		ColorBeing colorBeing = GetComponent<ColorBeing>();
+		colorBeing.color = color;
+	}
+
+	void Update()
+	{
+		if (instantiatedBody == null && selectedBodyIndex >= 0)
+			SpawnBody(selectedBodyIndex);
+	}
+
+	void OnSelectedBodyIndex(int selectedBody)
+	{
+		SpawnBody(selectedBody);
+	}
+
+//	[ClientRpc]
+//	void RpcSpawnBody(int bodyIndex)
+//	{
+//		SpawnBody(bodyIndex);
+//	}
+
+	void SpawnBody(int bodyIndex)
+	{
+		instantiatedBody = Instantiate(bodies[bodyIndex], bodyContainer);
+		instantiatedBody.transform.localPosition = Vector3.zero;
+		instantiatedBody.transform.localRotation = Quaternion.identity;
+		GetComponent<ColorBeing>().UpdateColorSprites();
+	}
+
 }

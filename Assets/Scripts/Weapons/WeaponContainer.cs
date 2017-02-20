@@ -34,5 +34,6 @@ public abstract class WeaponContainer : TigglyNetworkBehaviour {
 		{
 			weaponComponents[i].enabled = (weaponIndex == i);
 		}
+		WeaponButtonsContainer.instance.UpdateButtons(weaponIndex);
 	}
 }

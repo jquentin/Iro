@@ -26,6 +26,7 @@ public class ColorWheel : MonoBehaviour {
 
 	public void UpdateSelector(float hue)
 	{
+		transform.localRotation = Quaternion.Euler(0f, 0f, -hue * 360f);
 		selectorPivot.localRotation = Quaternion.Euler(0f, 0f, hue * 360f);
 		selectorPivot.GetComponentInChildren<SpriteRenderer>().color = Color.HSVToRGB((hue + 0.5f) % 1f, 1f, 1f);
 	}

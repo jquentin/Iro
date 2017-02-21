@@ -65,5 +65,7 @@ public class HPChangeLabel : MonoBehaviour {
 	{
 		transform.position = new Vector3(transform.position.x, yStart + value * yMove, transform.position.z);
 		alpha = 1f - value;
+		if (value >= 1f)
+			Destroy(gameObject);
 	}
 }

@@ -30,8 +30,14 @@ public class ControllableColorBeing : ColorBeing {
 		float h, s, v;
 		Color.RGBToHSV(this.color, out h, out s, out v);
 		h += value % 1f;
-		this.color = Color.HSVToRGB(h, s, v);
-		colorWheel.UpdateSelector(h);
+		this.color = Color.HSVToRGB(h, 1f, 1f);
+		RpcUpdateSelector(h);
+	}
+
+	[ClientRpc]
+	void RpcUpdateSelector(float hue)
+	{
+		colorWheel.UpdateSelector(hue);
 	}
 
 	protected override void Update()

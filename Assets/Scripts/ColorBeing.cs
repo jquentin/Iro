@@ -18,6 +18,8 @@ public class ColorBeing : ColorObject, Shootable {
 
 	public bool isDead { get { return (health <= 0); } }
 
+	Vector3 initPos;
+
 	HPChangeSpawner _hpChangeSpawner;
 	HPChangeSpawner hpChangeSpawner
 	{
@@ -33,6 +35,7 @@ public class ColorBeing : ColorObject, Shootable {
 	{
 		base.Start();
 		health = maxHealth;
+		initPos = transform.position;
 	}
 
 	protected override void Update()
@@ -75,6 +78,50 @@ public class ColorBeing : ColorObject, Shootable {
 			sr.color = sr.color.LowerAlpha(0.6f);
 		foreach(Collider2D c in GetComponentsInChildren<Collider2D>(true))
 			c.enabled = false;
+		Invoke("Respawn", 1f);
+	}
+
+	void Respawn()
+	{
+		StartCoroutine(Respawn_CR());
+	}
+	void ActualRespawn()
+	{
+		transform.position = initPos;
+		if (!isLocalPlayer)
+			return;
+		CmdResuscitate();
+	}
+
+	[Command]
+	void CmdResuscitate()
+	{
+		health = maxHealth;
+	}
+
+	void SetRenderersAlpha(float alpha)
+	{
+		foreach(SpriteRenderer sr in GetComponentsInChildren<SpriteRenderer>(true))
+			sr.color = sr.color.SetAlpha(alpha);
+	}
+
+	IEnumerator Respawn_CR()
+	{
+		SetRenderersAlpha(0f);
+		yield return new WaitForSeconds(0.15f);
+		SetRenderersAlpha(0.5f);
+		yield return new WaitForSeconds(0.15f);
+		SetRenderersAlpha(0f);
+		yield return new WaitForSeconds(0.15f);
+		SetRenderersAlpha(0.5f);
+		yield return new WaitForSeconds(0.15f);
+		SetRenderersAlpha(0f);
+		yield return new WaitForSeconds(0.15f);
+		SetRenderersAlpha(1f);
+		ActualRespawn();
+		yield return new WaitForSeconds(0.15f);
+		foreach(Collider2D c in GetComponentsInChildren<Collider2D>(true))
+			c.enabled = true;
 	}
 
 	static float CalculateHitFactor(float hueDif)

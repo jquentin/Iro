@@ -49,7 +49,7 @@ public class ColorMissile : ColorObject {
 	void Explode()
 	{
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explodeRadius);
-		Explosion.CreateExplosion(explosionPrefab, transform.position, 4f, color);
+		Explosion.CreateExplosion(explosionPrefab, transform.position, explodeRadius, color);
 		foreach(Collider2D collider in colliders)
 		{
 			Shootable shootable = collider.GetComponentInParent<Shootable>();

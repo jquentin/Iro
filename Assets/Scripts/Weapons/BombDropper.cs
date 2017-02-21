@@ -8,6 +8,7 @@ public class BombDropper : Weapon {
 	float timeLastDrop;
 
 	public Bomb bombPrefab;
+	bool isReadyToShoot = true;
 
 	protected override void CmdShoot ()
 	{
@@ -28,7 +29,19 @@ public class BombDropper : Weapon {
 			return;
 		if (Input.GetMouseButtonDown(0))
 		{
+			if (!isReadyToShoot)
+			{
+//				audioSource.PlayOneShotControlled(missileNotReadySound, AudioType.Sound);
+				return;
+			}
 			CmdDropBomb();
+			isReadyToShoot = false;
+			Invoke("Reload", bombPrefab.timeBeforeExplosion);
 		}
+	}
+
+	void Reload()
+	{
+		isReadyToShoot = true;
 	}
 }

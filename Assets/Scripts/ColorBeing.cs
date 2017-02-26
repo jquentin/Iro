@@ -16,6 +16,8 @@ public class ColorBeing : ColorObject, Shootable {
 	[SyncVar(hook = "OnHealthChanged")]
 	public int health;
 
+	public HealthBar healthBar;
+
 	public bool isDead { get { return (health <= 0); } }
 
 	Vector3 initPos;
@@ -60,6 +62,7 @@ public class ColorBeing : ColorObject, Shootable {
 	void OnHealthChanged(int health)
 	{
 		this.health = health;
+		healthBar.UpdateBar((float)health / (float) maxHealth);
 		if (health <= 0)
 			Die();
 	}

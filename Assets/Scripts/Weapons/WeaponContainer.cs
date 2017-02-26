@@ -14,6 +14,7 @@ public abstract class WeaponContainer : TigglyNetworkBehaviour {
 	void Start () 
 	{
 		OnChangeWeapon(currentWeaponIndex);
+		WeaponButtonsContainer.instance.UpdateButtonsMode(GetComponent<ColorBeing>());
 	}
 
 	[Command]

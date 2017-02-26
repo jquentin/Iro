@@ -6,6 +6,9 @@ public class WeaponButtonsContainer : MonoSingleton <WeaponButtonsContainer> {
 
 	public List<WeaponButton> weaponButtons;
 
+	/// <summary>
+	/// Updates the selected button according to the selected weapon.
+	/// </summary>
 	public void UpdateButtons(int selectedWeapon)
 	{
 		for (int i = 0 ; i < weaponButtons.Count ; i++)
@@ -14,6 +17,17 @@ public class WeaponButtonsContainer : MonoSingleton <WeaponButtonsContainer> {
 				weaponButtons[i].Select();
 			else
 				weaponButtons[i].Unselect();
+		}
+	} 
+
+	/// <summary>
+	/// Updates the buttons visual according to the current bonuses.
+	/// </summary>
+	public void UpdateButtonsMode(ColorBeing being)
+	{
+		for (int i = 0 ; i < weaponButtons.Count ; i++)
+		{
+			weaponButtons[i].UpdateMode(being);
 		}
 	}
 

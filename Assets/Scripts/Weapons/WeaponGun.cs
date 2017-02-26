@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class WeaponGun : Weapon {
+public abstract class WeaponGun : Weapon {
 
 	public float bulletSpeed = 1f;
 
@@ -12,6 +13,11 @@ public class WeaponGun : Weapon {
 	public List<AudioClip> shootSound;
 
 	public ColorBullet bulletPrefab;
+
+	protected abstract ColorBullet currentBulletPrefab
+	{
+		get;
+	}
 
 	protected override void CmdShoot ()
 	{
@@ -22,7 +28,7 @@ public class WeaponGun : Weapon {
 	protected void CmdShoot (float angleShift)
 	{
 		RpcPlayShootSound();
-		ColorBullet bullet = Instantiate(bulletPrefab, gunEnd);
+		ColorBullet bullet = Instantiate(currentBulletPrefab, gunEnd);
 		bullet.color = this.color;
 		bullet.transform.localPosition = Vector3.zero;
 		bullet.transform.localRotation = bulletPrefab.transform.localRotation;
@@ -38,14 +44,5 @@ public class WeaponGun : Weapon {
 		audioSource.PlayOneShotControlled(shootSound, AudioType.Sound);
 	}
 
-	protected virtual void Update()
-	{
-		if (!isLocalPlayer || owner.isDead)
-			return;
-		if (Input.GetMouseButtonDown(0))
-		{
-			CmdShoot();
-		}
-	}
 
 }

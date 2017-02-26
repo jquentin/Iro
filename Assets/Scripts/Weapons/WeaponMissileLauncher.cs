@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -15,6 +16,9 @@ public class WeaponMissileLauncher : Weapon {
 	public ColorMissile missilePrefab;
 
 	bool isReadyToShoot = true;
+
+	[NonSerialized]
+	public bool isIllimitedMode = false;
 
 	protected override void CmdShoot ()
 	{
@@ -46,7 +50,7 @@ public class WeaponMissileLauncher : Weapon {
 			return;
 		if (Input.GetMouseButtonDown(0))
 		{
-			if (!isReadyToShoot)
+			if (!isReadyToShoot && !isIllimitedMode)
 			{
 				audioSource.PlayOneShotControlled(missileNotReadySound, AudioType.Sound);
 				return;
@@ -54,6 +58,7 @@ public class WeaponMissileLauncher : Weapon {
 			Vector2 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			CmdShoot(target);
 			isReadyToShoot = false;
+			CancelInvoke("Reload");
 			Invoke("Reload", timeToReload);
 		}
 	}

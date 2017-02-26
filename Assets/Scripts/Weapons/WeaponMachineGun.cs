@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +11,18 @@ public class WeaponMachineGun : WeaponGun {
 
 	float lastShotTime = float.MinValue;
 
-	protected override void Update()
+	[NonSerialized]
+	public bool isStraightMode = false;
+
+	protected override ColorBullet currentBulletPrefab 
+	{
+		get 
+		{
+			return bulletPrefab;
+		}
+	}
+
+	void Update()
 	{
 		if (!isLocalPlayer || owner.isDead)
 			return;
@@ -18,7 +30,8 @@ public class WeaponMachineGun : WeaponGun {
 		{
 			if (Time.time - lastShotTime > timeBetweenShots)
 			{
-				CmdShoot(Random.Range(-angleVariation, angleVariation));
+				float shotAngle = isStraightMode ? 0f : UnityEngine.Random.Range(-angleVariation, angleVariation);
+				CmdShoot(shotAngle);
 				lastShotTime = Time.time;
 			}
 		}

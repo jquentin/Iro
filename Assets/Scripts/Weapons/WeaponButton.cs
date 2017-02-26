@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponButton : MonoBehaviour {
+public abstract class WeaponButton : MonoBehaviour {
 
 	public GameObject selected;
 
@@ -15,4 +15,7 @@ public class WeaponButton : MonoBehaviour {
 	{
 		selected.SetActive(false);
 	}
+
+	public abstract void UpdateMode(ColorBeing being);
+
 }

@@ -13,6 +13,8 @@ public class BonusBoxSpawner : NetworkBehaviour {
 
 	Dictionary<Transform, BonusBox> spawnedBonusBoxes = new Dictionary<Transform, BonusBox>();
 
+	float timeLastSpawn;
+
 	List<Transform> availableSpawners
 	{
 		get
@@ -23,10 +25,19 @@ public class BonusBoxSpawner : NetworkBehaviour {
 		}
 	}
 
-	public override void OnStartServer ()
+	void Start ()
 	{
-		base.OnStartServer ();
-		InvokeRepeating("SpawnBonusBox", timeBetweenSpawns, timeBetweenSpawns);
+		if (isServer)
+			timeLastSpawn = Time.time;
+	}
+
+	void Update()
+	{
+
+		if (!isServer)
+			return;
+		if (Time.time >= timeLastSpawn + timeBetweenSpawns)
+			SpawnBonusBox();
 	}
 
 	void SpawnBonusBox()
@@ -39,6 +50,7 @@ public class BonusBoxSpawner : NetworkBehaviour {
 		BonusBox createdBox = BonusBox.CreateBonusBox(bonusBoxPrefab, chosenSpawner.position, Color.HSVToRGB(Random.Range(0f, 1f), 1f, 1f));
 		spawnedBonusBoxes.Add(chosenSpawner, createdBox);
 		NetworkServer.Spawn(createdBox.gameObject);
+		timeLastSpawn = Time.time;
 	}
 
 	void CleanUpSpawned()

@@ -35,7 +35,8 @@ public class BonusBoxSpawner : NetworkBehaviour {
 		if (availableSpawners.Count == 0)
 			return;
 		Transform chosenSpawner = availableSpawners[Random.Range(0, availableSpawners.Count)];
-		BonusBox createdBox = Instantiate(bonusBoxPrefab, chosenSpawner.position, Quaternion.identity);
+//		BonusBox createdBox = Instantiate(bonusBoxPrefab, chosenSpawner.position, Quaternion.identity);
+		BonusBox createdBox = BonusBox.CreateBonusBox(bonusBoxPrefab, chosenSpawner.position, Color.HSVToRGB(Random.Range(0f, 1f), 1f, 1f));
 		spawnedBonusBoxes.Add(chosenSpawner, createdBox);
 		NetworkServer.Spawn(createdBox.gameObject);
 	}

@@ -9,9 +9,20 @@ public class WeaponSimpleGun : WeaponGun
 	
 	public ColorBullet largeBulletPrefab;
 
-	[NonSerialized]
+	[SyncVar(hook="OnLargeModeChanged")]
 	public bool isLargeMode = false;
 
+	[Command]
+	public void CmdSetLargeMode(bool enable)
+	{
+		isLargeMode = enable;
+	} 
+
+	void OnLargeModeChanged(bool largeModeValue)
+	{
+		isLargeMode = largeModeValue;
+		WeaponButtonsContainer.instance.UpdateButtonsMode(owner);
+	}
 
 	protected override ColorBullet currentBulletPrefab 
 	{

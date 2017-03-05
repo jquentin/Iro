@@ -6,11 +6,11 @@ public class BonusLargeBulletGun : Bonus {
 	
 	protected override void ApplyBonusEffects ()
 	{
-		being.GetComponent<WeaponSimpleGun>().isLargeMode = true;
+		being.GetComponent<WeaponSimpleGun>().CmdSetLargeMode(true);
 	}
 
 	protected override void FinishBonusEffects ()
 	{
-		being.GetComponent<WeaponSimpleGun>().isLargeMode = false;
+		being.GetComponent<WeaponSimpleGun>().CmdSetLargeMode(false);
 	}
 }

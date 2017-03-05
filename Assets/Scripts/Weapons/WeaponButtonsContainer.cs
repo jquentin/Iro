@@ -25,6 +25,8 @@ public class WeaponButtonsContainer : MonoSingleton <WeaponButtonsContainer> {
 	/// </summary>
 	public void UpdateButtonsMode(ColorBeing being)
 	{
+		if (!being.isLocalPlayer)
+			return;
 		for (int i = 0 ; i < weaponButtons.Count ; i++)
 		{
 			weaponButtons[i].UpdateMode(being);

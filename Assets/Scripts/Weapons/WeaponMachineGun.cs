@@ -12,8 +12,20 @@ public class WeaponMachineGun : WeaponGun {
 
 	float lastShotTime = float.MinValue;
 
-	[NonSerialized]
+	[SyncVar(hook="OnStraightModeChanged")]
 	public bool isStraightMode = false;
+
+	[Command]
+	public void CmdSetStraightMode(bool enable)
+	{
+		isStraightMode = enable;
+	} 
+
+	void OnStraightModeChanged(bool largeModeValue)
+	{
+		isStraightMode = largeModeValue;
+		WeaponButtonsContainer.instance.UpdateButtonsMode(owner);
+	}
 
 	protected override ColorBullet currentBulletPrefab 
 	{

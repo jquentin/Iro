@@ -17,11 +17,6 @@ public class BombDropper : Weapon {
 
 	bool isReadyToShoot = true;
 
-	protected override void CmdShoot ()
-	{
-		throw new System.NotImplementedException ();
-	}
-
 	[Command]
 	protected void CmdDropBomb ()
 	{

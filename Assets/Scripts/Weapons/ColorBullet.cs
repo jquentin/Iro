@@ -6,14 +6,19 @@ public class ColorBullet : ColorObject {
 
 	public float force = 1f;
 
+	public Explosion explosionPrefab;
+
 	void OnTriggerEnter2D (Collider2D other) 
 	{
+		if (!isServer)
+			return;
 		Shootable shootable = other.GetComponentInParent<Shootable>();
 		ColorBeing being = shootable as ColorBeing;
 		if (shootable != null && (being == null || !being.isDead))
 		{
 			shootable.BeShot(color, force);
 			Destroy(gameObject);
+			Explosion.CreateExplosion(explosionPrefab, transform.position, transform.localScale.x, color, false);
 		}
 	}
 

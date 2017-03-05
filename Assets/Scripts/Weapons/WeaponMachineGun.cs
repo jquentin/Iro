@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class WeaponMachineGun : WeaponGun {
 
@@ -22,6 +23,13 @@ public class WeaponMachineGun : WeaponGun {
 		}
 	}
 
+	[Command]
+	protected void CmdShoot ()
+	{
+		float shotAngle = isStraightMode ? 0f : UnityEngine.Random.Range(-angleVariation, angleVariation);
+		Shoot (shotAngle);
+	}
+
 	void Update()
 	{
 		if (!isLocalPlayer || owner.isDead)
@@ -30,8 +38,7 @@ public class WeaponMachineGun : WeaponGun {
 		{
 			if (Time.time - lastShotTime > timeBetweenShots)
 			{
-				float shotAngle = isStraightMode ? 0f : UnityEngine.Random.Range(-angleVariation, angleVariation);
-				CmdShoot(shotAngle);
+				CmdShoot();
 				lastShotTime = Time.time;
 			}
 		}

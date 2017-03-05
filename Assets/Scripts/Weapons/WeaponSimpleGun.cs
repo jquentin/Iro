@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class WeaponSimpleGun : WeaponGun 
 {
@@ -21,6 +22,12 @@ public class WeaponSimpleGun : WeaponGun
 			else
 				return bulletPrefab;
 		}
+	}
+
+	[Command]
+	protected void CmdShoot ()
+	{
+		Shoot(0f);
 	}
 
 	void Update()

@@ -25,6 +25,7 @@ public class ColorMissile : ColorObject {
 		float speed = (target - pos).magnitude / timeToTarget;
 		GetComponent<Rigidbody2D>().velocity = speed * (target - pos).normalized;
 		Invoke("Explode", timeToTarget);
+		NetworkServer.Spawn(gameObject);
 		RpcGoUp();
 	}
 

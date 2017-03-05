@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public abstract class Weapon : TigglyNetworkBehaviour {
 
@@ -22,7 +23,5 @@ public abstract class Weapon : TigglyNetworkBehaviour {
 			return owner.color;
 		}
 	}
-
-	protected abstract void CmdShoot();
 
 }

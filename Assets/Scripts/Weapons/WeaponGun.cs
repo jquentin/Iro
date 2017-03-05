@@ -19,16 +19,13 @@ public abstract class WeaponGun : Weapon {
 		get;
 	}
 
-	protected override void CmdShoot ()
+	protected void Shoot (float angleShift)
 	{
-		CmdShoot(0f);
-	}
-
-	[Command]
-	protected void CmdShoot (float angleShift)
-	{
+		if (!isServer)
+			return;
 		RpcPlayShootSound();
 		ColorBullet bullet = Instantiate(currentBulletPrefab, gunEnd);
+		Debug.Log(bullet.name);
 		bullet.color = this.color;
 		bullet.transform.localPosition = Vector3.zero;
 		bullet.transform.localRotation = bulletPrefab.transform.localRotation;

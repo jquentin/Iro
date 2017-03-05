@@ -9,9 +9,10 @@ public class Explosion : ColorObject
 	public List<AudioClip> explodeSound;
 
 	[ClientRpc]
-	void RpcInit(float scale, Color color)
+	void RpcInit(float scale, Color color, bool playSound)
 	{
-		audioSource.PlayOneShotControlled(explodeSound, AudioType.Sound);
+		if (playSound)
+			audioSource.PlayOneShotControlled(explodeSound, AudioType.Sound);
 		this.color = color;
 		iTween.ScaleTo(gameObject, iTween.Hash(
 			"scale", transform.localScale * scale,
@@ -19,11 +20,11 @@ public class Explosion : ColorObject
 		iTween.FadeTo(gameObject, 0f, 0.5f);
 	}
 
-	public static void CreateExplosion(Explosion explosionPrefab, Vector2 pos, float scale, Color color)
+	public static void CreateExplosion(Explosion explosionPrefab, Vector2 pos, float scale, Color color, bool playSound = true)
 	{
 		Explosion explosion = Instantiate(explosionPrefab, pos, Quaternion.identity);
 		NetworkServer.Spawn(explosion.gameObject);
-		explosion.RpcInit(scale, color);
+		explosion.RpcInit(scale, color, playSound);
 	}
 
 }

@@ -20,7 +20,7 @@ public class WeaponMissileLauncher : Weapon {
 	[NonSerialized]
 	public bool isIllimitedMode = false;
 
-	protected override void CmdShoot ()
+	protected void CmdShoot ()
 	{
 		CmdShoot(Vector2.zero);
 	}
@@ -34,7 +34,6 @@ public class WeaponMissileLauncher : Weapon {
 		missile.transform.localPosition = Vector3.zero;
 		missile.transform.localRotation = missilePrefab.transform.localRotation;
 		missile.transform.parent = null;
-		NetworkServer.Spawn(missile.gameObject);
 		missile.Shoot(target);
 	}
 

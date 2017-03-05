@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AICharacterController : CharacterController {
+public class AICharacterController : PlayerController {
 
 	void Update()
 	{

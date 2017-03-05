@@ -46,7 +46,7 @@ public class ColorBeing : ColorObject, Shootable {
 //		BeShot(Color.blue, 10f);
 	}
 
-	public void BeShot (Color c, float force) 
+	public void BeShot (Color c, float force, Vector2 direction) 
 	{
 		if (!isServer)
 			return;
@@ -57,6 +57,14 @@ public class ColorBeing : ColorObject, Shootable {
 		int damage = CalculateDamage(hitFactor, force);
 		health = Mathf.Min(health - damage, maxHealth);
 		RpcSpawnHealthChange(damage, hitFactor);
+		RpcGetPushed(force * direction.normalized);
+	}
+
+	[ClientRpc]
+	void RpcGetPushed(Vector2 force)
+	{
+		GetComponent<PlayerController>().GetRecoil();
+		GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
 	}
 
 	void OnHealthChanged(int health)

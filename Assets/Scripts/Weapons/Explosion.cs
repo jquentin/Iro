@@ -25,6 +25,16 @@ public class Explosion : ColorObject
 		Explosion explosion = Instantiate(explosionPrefab, pos, Quaternion.identity);
 		NetworkServer.Spawn(explosion.gameObject);
 		explosion.RpcInit(scale, color, playSound);
+
+//		Collider2D[] colliders = Physics2D.OverlapCircleAll(pos, scale * 10f);
+//		foreach(Collider2D collider in colliders)
+//		{
+//			ColorBeing being = collider.GetComponentInParent<ColorBeing>();
+//			if (being != null)
+//			{
+//				being.GetComponent<Rigidbody2D>().AddForce(((Vector2)being.transform.position - pos).normalized * scale * 10f, ForceMode2D.Impulse);
+//			}
+//		}
 	}
 
 }

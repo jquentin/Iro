@@ -56,7 +56,7 @@ public class ColorMissile : ColorObject {
 			Shootable shootable = collider.GetComponentInParent<Shootable>();
 			if (shootable != null)
 			{
-				shootable.BeShot(color, force);
+				shootable.BeShot(color, force, collider.transform.position - transform.position);
 			}
 		}
 		Destroy(gameObject);

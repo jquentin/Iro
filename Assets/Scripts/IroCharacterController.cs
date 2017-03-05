@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IroCharacterController : CharacterController {
+public class IroCharacterController : PlayerController {
 
 	bool isMoving;
 
 	void FixedUpdate () 
 	{
-		if (!isLocalPlayer || owner.isDead)
+		if (!isLocalPlayer || owner.isDead || !canMove)
 			return;
 		
 		float vertical = Input.GetAxis("Vertical");

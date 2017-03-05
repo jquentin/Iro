@@ -16,7 +16,7 @@ public class ColorBullet : ColorObject {
 		ColorBeing being = shootable as ColorBeing;
 		if (shootable != null && (being == null || !being.isDead))
 		{
-			shootable.BeShot(color, force);
+			shootable.BeShot(color, force, GetComponent<Rigidbody2D>().velocity);
 			Destroy(gameObject);
 			Explosion.CreateExplosion(explosionPrefab, transform.position, transform.localScale.x, color, false);
 		}

@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class CharacterController : NetworkBehaviour {
+public class PlayerController : NetworkBehaviour {
 
 	public float moveSpeed = 1f;
 
 	public Transform body;
+
+	protected bool canMove = true;
+
+	const float RECOIL_TIME = 0.04f;
 
 	Rigidbody2D _rigidbody;
 	protected Rigidbody2D rigidbody
@@ -42,5 +46,17 @@ public class CharacterController : NetworkBehaviour {
 			body.eulerAngles = Vector3.back * (-value - 90f);
 		}
 	}
+
+	public void GetRecoil()
+	{
+		canMove = false;
+		Invoke("FinishRecoil", RECOIL_TIME);
+	}
+
+	void FinishRecoil()
+	{
+		canMove = true;
+	}
+
 
 }

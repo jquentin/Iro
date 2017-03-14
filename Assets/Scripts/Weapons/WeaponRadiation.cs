@@ -52,6 +52,7 @@ public class WeaponRadiation : Weapon {
 		ColorBeing being = shootable as ColorBeing;
 		if (shootable != null && being != null && !being.isDead)
 		{
+			audioSource.PlayOneShotControlled(touchSound, AudioType.Sound);
 			shootable.BeShot(owner.color, 1f, other.transform.position - transform.position, 10f);
 //			Explosion.CreateExplosion(explosionPrefab, transform.position, transform.localScale.x, color, false);
 			StartCoroutine(InvalidateShootAtEOF());

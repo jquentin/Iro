@@ -5,6 +5,6 @@ using UnityEngine;
 public interface Shootable
 {
 
-	void BeShot (Color c, float force, Vector2 direction);
+	void BeShot (Color c, float force, Vector2 direction, float pushForce = -1f);
 
 }

@@ -13,6 +13,11 @@ public class PlayerController : NetworkBehaviour {
 
 	const float RECOIL_TIME = 0.04f;
 
+	void Awake()
+	{
+		owner.OnDead += OnPlayerDead;
+	}
+
 	Rigidbody2D _rigidbody;
 	protected Rigidbody2D rigidbody
 	{
@@ -56,6 +61,11 @@ public class PlayerController : NetworkBehaviour {
 	void FinishRecoil()
 	{
 		canMove = true;
+	}
+
+	void OnPlayerDead()
+	{
+		rigidbody.velocity = Vector2.zero;
 	}
 
 

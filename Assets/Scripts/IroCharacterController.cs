@@ -8,7 +8,7 @@ public class IroCharacterController : PlayerController {
 
 	void FixedUpdate () 
 	{
-		if (!isLocalPlayer)
+		if (!isLocalPlayer || owner.isDead)
 			rigidbody.velocity = Vector2.zero;
 
 		if (!isLocalPlayer || owner.isDead || !canMove)

@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -19,6 +20,8 @@ public class ColorBeing : ColorObject, Shootable {
 	public HealthBar healthBar;
 
 	public bool isDead { get { return (health <= 0); } }
+
+	public Action OnDead;
 
 	Vector3 initPos;
 
@@ -46,7 +49,14 @@ public class ColorBeing : ColorObject, Shootable {
 //		BeShot(Color.blue, 10f);
 	}
 
-	public void BeShot (Color c, float force, Vector2 direction) 
+	/// <summary>
+	/// Function called when the player gets shot or damaged.
+	/// </summary>
+	/// <param name="c">the color of the damaging effect</param>
+	/// <param name="force">the force of the damage.</param>
+	/// <param name="direction">The direction.</param>
+	/// <param name="pushForce">The force of the push. If it is -1, then force is used.</param>
+	public void BeShot (Color c, float force, Vector2 direction, float pushForce = -1f) 
 	{
 		if (!isServer)
 			return;
@@ -57,7 +67,8 @@ public class ColorBeing : ColorObject, Shootable {
 		int damage = CalculateDamage(hitFactor, force);
 		health = Mathf.Min(health - damage, maxHealth);
 		RpcSpawnHealthChange(damage, hitFactor);
-		RpcGetPushed(force * direction.normalized);
+		Vector2 push = ((pushForce < 0f) ? force : pushForce) * direction.normalized;
+		RpcGetPushed(push);
 	}
 
 	[ClientRpc]
@@ -90,6 +101,8 @@ public class ColorBeing : ColorObject, Shootable {
 		foreach(Collider2D c in GetComponentsInChildren<Collider2D>(true))
 			c.enabled = false;
 		Invoke("Respawn", 1f);
+		if (OnDead != null)
+			OnDead();
 	}
 
 	void Respawn()

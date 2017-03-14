@@ -27,6 +27,7 @@ public abstract class WeaponGun : Weapon {
 		ColorBullet bullet = Instantiate(currentBulletPrefab, gunEnd);
 		Debug.Log(bullet.name);
 		bullet.color = this.color;
+		bullet.owner = this.owner;
 		bullet.transform.localPosition = Vector3.zero;
 		bullet.transform.localRotation = bulletPrefab.transform.localRotation;
 		bullet.transform.parent = null;

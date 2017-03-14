@@ -8,13 +8,15 @@ public class ColorBullet : ColorObject {
 
 	public Explosion explosionPrefab;
 
+	public ColorBeing owner;
+
 	void OnTriggerEnter2D (Collider2D other) 
 	{
 		if (!isServer)
 			return;
 		Shootable shootable = other.GetComponentInParent<Shootable>();
 		ColorBeing being = shootable as ColorBeing;
-		if (shootable != null && (being == null || !being.isDead))
+		if (shootable != null && (being == null || !being.isDead) && being != owner)
 		{
 			shootable.BeShot(color, force, GetComponent<Rigidbody2D>().velocity);
 			Destroy(gameObject);

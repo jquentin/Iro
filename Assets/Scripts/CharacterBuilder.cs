@@ -19,18 +19,27 @@ public class CharacterBuilder : NetworkBehaviour {
 
 	void Awake () 
 	{
-		IroCharacterController characterController = GetComponent<IroCharacterController>();
-		ControllableColorBeing colorBeing = GetComponent<ControllableColorBeing>();
-		PlayerWeaponContainer weaponContainer = GetComponentInChildren<PlayerWeaponContainer>();
+		Init();
+	}
+
+	public void Init () 
+	{
 		if (!isPlayable)
 		{
+			IroCharacterController characterController = GetComponent<IroCharacterController>();
+			ControllableColorBeing colorBeing = GetComponent<ControllableColorBeing>();
+			PlayerWeaponContainer weaponContainer = GetComponentInChildren<PlayerWeaponContainer>();
+
 			AICharacterController newCharacterController = gameObject.AddComponent<AICharacterController>();
 			newCharacterController.body = characterController.body;
 			newCharacterController.moveSpeed = characterController.moveSpeed;
 			ColorBeing newColorBeing = gameObject.AddComponent<ColorBeing>();
 			newColorBeing.color = colorBeing.color;
 			newColorBeing.maxHealth = colorBeing.maxHealth;
-			WeaponContainer newWeaponContainer = weaponContainer.gameObject.AddComponent<WeaponContainer>();
+			newColorBeing.healthBar = colorBeing.healthBar;
+			WeaponContainer newWeaponContainer = weaponContainer.gameObject.AddComponent<AIWeaponContainer>();
+			newWeaponContainer.weaponComponents = weaponContainer.weaponComponents;
+			newWeaponContainer.currentWeaponIndex = weaponContainer.currentWeaponIndex;
 
 			Destroy(colorBeing.colorWheel.gameObject);
 			Destroy(characterController);
@@ -43,7 +52,8 @@ public class CharacterBuilder : NetworkBehaviour {
 	{
 		if (isLocalPlayer)
 		{
-			CmdSelectBody();
+			if (bodies != null && bodies.Count > 0)
+				CmdSelectBody();
 			CmdSelectColor();
 		}
 //		else

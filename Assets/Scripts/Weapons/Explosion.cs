@@ -16,7 +16,8 @@ public class Explosion : ColorObject
 		this.color = color;
 		iTween.ScaleTo(gameObject, iTween.Hash(
 			"scale", transform.localScale * scale,
-			"time", 0.5f));
+			"time", 0.5f,
+			"oncomplete", "DestroyExlosion"));
 		iTween.FadeTo(gameObject, 0f, 0.5f);
 	}
 
@@ -35,6 +36,11 @@ public class Explosion : ColorObject
 //				being.GetComponent<Rigidbody2D>().AddForce(((Vector2)being.transform.position - pos).normalized * scale * 10f, ForceMode2D.Impulse);
 //			}
 //		}
+	}
+
+	void DestroyExlosion()
+	{
+		Destroy(gameObject);
 	}
 
 }

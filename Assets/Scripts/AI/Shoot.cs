@@ -5,7 +5,7 @@ using BehaviorDesigner.Runtime.Tasks;
 using BehaviorDesigner.Runtime;
 
 [TaskCategory("Iro")]
-public class Shoot : Action {
+public class Shoot : IroCharacterAction {
 
 	float timeStart;
 
@@ -14,11 +14,19 @@ public class Shoot : Action {
 	[Tooltip("The character to shoot at")]
 	public SharedGameObject targetGO;
 
+	WeaponSimpleGun _gun;
+	WeaponSimpleGun gun
+	{
+		get
+		{
+			if (_gun == null)
+				_gun = GetComponent<WeaponSimpleGun>();
+			return _gun;
+		}
+	}
+
 	public override void OnStart ()
 	{
-//		WeaponContainer weaponContainer = GetComponent<WeaponContainer>();
-//		weaponContainer.weaponComponents[weaponContainer.currentWeaponIndex].Shoot();
-//		GetComponent<WeaponSimpleGun>().CmdShoot();
 		timeStart = Time.time;
 	}
 
@@ -26,10 +34,10 @@ public class Shoot : Action {
 	{
 		Debug.Log(targetGO.Value);
 		if (targetGO.Value != null)
-			GetComponent<PlayerController>().angle = PlayerController.SignedAngle(targetGO.Value.transform.position - this.transform.position);
+			controller.angle = PlayerController.SignedAngle(targetGO.Value.transform.position - this.transform.position);
 		if (Time.time - timeStart >= timeBeforeEnd)
 		{
-			GetComponent<WeaponSimpleGun>().CmdShoot();
+			gun.CmdShoot();
 			timeStart = Time.time;
 		}
 		return TaskStatus.Running;

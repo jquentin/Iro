@@ -71,6 +71,15 @@ public class ColorBeing : ColorObject, Shootable {
 		RpcGetPushed(push);
 	}
 
+	[Command]
+	public void CmdChangeHue(float value)
+	{
+		float h, s, v;
+		Color.RGBToHSV(this.color, out h, out s, out v);
+		h += value % 1f;
+		this.color = Color.HSVToRGB(h, 1f, 1f);
+	}
+
 	[ClientRpc]
 	void RpcGetPushed(Vector2 force)
 	{

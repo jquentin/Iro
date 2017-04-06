@@ -15,7 +15,7 @@ public class AICharacterController : PlayerController {
 
 	void Update()
 	{
-		velocity = Vector3.zero;
+//		velocity = Vector3.zero;
 
 //		if (transform.position.x > 10f)
 //			velocity = 1f * Vector3.left;

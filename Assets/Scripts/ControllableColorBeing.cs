@@ -24,16 +24,6 @@ public class ControllableColorBeing : ColorBeing {
 		CloseColorWheel();
 	}
 
-	[Command]
-	void CmdChangeHue(float value)
-	{
-		float h, s, v;
-		Color.RGBToHSV(this.color, out h, out s, out v);
-		h += value % 1f;
-		this.color = Color.HSVToRGB(h, 1f, 1f);
-		RpcUpdateSelector(h);
-	}
-
 	[ClientRpc]
 	void RpcUpdateSelector(float hue)
 	{
@@ -65,6 +55,14 @@ public class ControllableColorBeing : ColorBeing {
 	void CloseColorWheel()
 	{
 		colorWheel.Hide();
+	}
+
+	protected override void OnColorChangedVirtual (Color color)
+	{
+		base.OnColorChangedVirtual (color);
+		float h,s,v;
+		Color.RGBToHSV(color, out h, out s, out v);
+		RpcUpdateSelector(h);
 	}
 
 }

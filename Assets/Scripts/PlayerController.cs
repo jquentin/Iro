@@ -58,7 +58,7 @@ public class PlayerController : NetworkBehaviour {
 		{
 			return rigidbody.velocity;
 		}
-		protected set
+		set
 		{
 			rigidbody.velocity = value;
 		}

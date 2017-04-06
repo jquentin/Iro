@@ -40,6 +40,12 @@ public class ColorObject : TigglyNetworkBehaviour {
 	{
 		this.color = color;
 		UpdateColorSprites();
+		OnColorChangedVirtual(color);
+	}
+
+
+	protected virtual void OnColorChangedVirtual(Color color)
+	{
 	}
 
 }

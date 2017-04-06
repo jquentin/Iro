@@ -36,7 +36,7 @@ public class WeaponSimpleGun : WeaponGun
 	}
 
 	[Command]
-	protected void CmdShoot ()
+	public void CmdShoot ()
 	{
 		Shoot(0f);
 	}

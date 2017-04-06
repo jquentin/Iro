@@ -17,11 +17,12 @@ public class CharacterBuilder : NetworkBehaviour {
 
 	static int chosenColors = 0;
 
-	void Awake () 
-	{
-		Init();
-	}
+//	void Awake () 
+//	{
+//		Init();
+//	}
 
+	[ContextMenu("Init")]
 	public void Init () 
 	{
 		if (!isPlayable)
@@ -41,11 +42,22 @@ public class CharacterBuilder : NetworkBehaviour {
 			newWeaponContainer.weaponComponents = weaponContainer.weaponComponents;
 			newWeaponContainer.currentWeaponIndex = weaponContainer.currentWeaponIndex;
 
-			Destroy(colorBeing.colorWheel.gameObject);
-			Destroy(characterController);
-			Destroy(colorBeing);
-			Destroy(weaponContainer);
+			GetComponent<NetworkIdentity>().localPlayerAuthority = false;
+			GetComponent<NetworkIdentity>().serverOnly = true;
+
+			DestroyOrDestroyImmediate(colorBeing.colorWheel.gameObject);
+			DestroyOrDestroyImmediate(characterController);
+			DestroyOrDestroyImmediate(colorBeing);
+			DestroyOrDestroyImmediate(weaponContainer);
 		}
+	}
+
+	void DestroyOrDestroyImmediate(Object o)
+	{
+		if (Application.isPlaying)
+			Destroy(o);
+		else
+			DestroyImmediate(o, true);
 	}
 
 	void Start()

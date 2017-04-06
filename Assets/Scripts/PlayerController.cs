@@ -46,9 +46,21 @@ public class PlayerController : NetworkBehaviour {
 		{
 			return body.eulerAngles.z - 90f;
 		}
-		protected set
+		set
 		{
 			body.eulerAngles = Vector3.back * (-value - 90f);
+		}
+	}
+
+	public Vector2 velocity
+	{
+		get
+		{
+			return rigidbody.velocity;
+		}
+		protected set
+		{
+			rigidbody.velocity = value;
 		}
 	}
 
@@ -68,5 +80,9 @@ public class PlayerController : NetworkBehaviour {
 		rigidbody.velocity = Vector2.zero;
 	}
 
+	public static float SignedAngle(Vector2 vector)
+	{
+		return Vector2.Angle(Vector2.right, vector) * ((vector.y >= 0f) ? 1f : -1f);
+	}
 
 }

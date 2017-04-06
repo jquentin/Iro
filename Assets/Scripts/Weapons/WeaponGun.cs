@@ -31,8 +31,7 @@ public abstract class WeaponGun : Weapon {
 		bullet.transform.localPosition = Vector3.zero;
 		bullet.transform.localRotation = bulletPrefab.transform.localRotation;
 		bullet.transform.parent = null;
-		IroCharacterController cc = GetComponentInParent<IroCharacterController>();
-		bullet.Shoot(cc.angle + angleShift, bulletSpeed);
+		bullet.Shoot(controller.angle + angleShift, bulletSpeed);
 		NetworkServer.Spawn(bullet.gameObject);
 	}
 

@@ -1,6 +1,7 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class IroCharacterController : PlayerController {
 
@@ -9,14 +10,14 @@ public class IroCharacterController : PlayerController {
 	void FixedUpdate () 
 	{
 		if (!isLocalPlayer || owner.isDead)
-			rigidbody.velocity = Vector2.zero;
+			velocity = Vector2.zero;
 
 		if (!isLocalPlayer || owner.isDead || !canMove)
 			return;
 		
 		float vertical = Input.GetAxis("Vertical");
 		float horizontal = Input.GetAxis("Horizontal");
-		rigidbody.velocity = new Vector2(moveSpeed * horizontal, moveSpeed * vertical);
+		velocity = new Vector2(moveSpeed * horizontal, moveSpeed * vertical);
 		if (vertical != 0f || horizontal != 0f)
 		{
 //			transform.Translate(new Vector3(moveSpeed * horizontal, moveSpeed * vertical));
@@ -31,10 +32,5 @@ public class IroCharacterController : PlayerController {
 		worldMousePos.z = 0f;
 		Vector2 dif = worldMousePos - transform.position;
 		angle = SignedAngle(dif);
-	}
-
-	public static float SignedAngle(Vector2 vector)
-	{
-		return Vector2.Angle(Vector2.right, vector) * ((vector.y >= 0f) ? 1f : -1f);
 	}
 }

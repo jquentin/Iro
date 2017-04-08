@@ -8,11 +8,11 @@ using BehaviorDesigner.Runtime;
 [TaskCategory("Iro")]
 public class WeaponUpgraded : IroCharacterConditional {
 
-	public Weapon weapon;
+	public SharedWeapon weapon;
 
 	public override TaskStatus OnUpdate ()
 	{
-		if (weapon.isUpgraded)
+		if (weapon.Value.isUpgraded)
 		{
 			return TaskStatus.Success;
 		}

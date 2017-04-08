@@ -7,6 +7,12 @@ public class IroCharacterController : PlayerController {
 
 	bool isMoving;
 
+	void Start()
+	{
+		if (isLocalPlayer)
+			playerName = OfflineScene.playerName;
+	}
+
 	void FixedUpdate () 
 	{
 		if (!isLocalPlayer || owner.isDead)

@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class PlayerController : NetworkBehaviour {
+	
+	[SyncVar]
+	public string playerName;
 
 	public float moveSpeed = 1f;
 

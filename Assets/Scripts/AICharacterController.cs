@@ -13,6 +13,17 @@ public class AICharacterController : PlayerController {
 //		GetComponent<NetworkIdentity>().serverOnly = true;
 	}
 
+	static int indexAI = 1;
+
+	void Start()
+	{
+		if (isServer)
+		{
+			playerName = string.Format("AI-{0}", indexAI);
+			indexAI++;
+		}
+	}
+
 	void Update()
 	{
 //		velocity = Vector3.zero;

@@ -56,4 +56,15 @@ public class WeaponSimpleGun : WeaponGun
 			CmdShoot();
 		}
 	}
+
+	protected override void PlayShootSoundOnClients ()
+	{
+		RpcPlayShootSound();
+	}
+
+	[ClientRpc]
+	protected void RpcPlayShootSound ()
+	{
+		audioSource.PlayOneShotControlled(shootSound, AudioType.Sound);
+	}
 }

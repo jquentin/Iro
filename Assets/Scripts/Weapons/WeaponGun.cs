@@ -23,7 +23,7 @@ public abstract class WeaponGun : Weapon {
 	{
 		if (!isServer)
 			return;
-		RpcPlayShootSound();
+		PlayShootSoundOnClients();
 		ColorBullet bullet = Instantiate(currentBulletPrefab, gunEnd);
 		Debug.Log(bullet.name);
 		bullet.color = this.color;
@@ -35,11 +35,7 @@ public abstract class WeaponGun : Weapon {
 		NetworkServer.Spawn(bullet.gameObject);
 	}
 
-	[ClientRpc]
-	void RpcPlayShootSound()
-	{
-		audioSource.PlayOneShotControlled(shootSound, AudioType.Sound);
-	}
+	protected abstract void PlayShootSoundOnClients();
 
 
 }

@@ -67,4 +67,15 @@ public class WeaponMachineGun : WeaponGun {
 		}
 	}
 
+	protected override void PlayShootSoundOnClients ()
+	{
+		RpcPlayShootSound();
+	}
+
+	[ClientRpc]
+	protected void RpcPlayShootSound ()
+	{
+		audioSource.PlayOneShotControlled(shootSound, AudioType.Sound);
+	}
+
 }

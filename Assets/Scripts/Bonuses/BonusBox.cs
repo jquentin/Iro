@@ -38,9 +38,10 @@ public class BonusBox : ColorObject {
 
 	void ApplyBonus(ColorBeing being)
 	{
-		if (!being.isLocalPlayer)
-			return;
-		Bonus chosenBonus = possibleBonuses[UnityEngine.Random.Range(0, possibleBonuses.Count)];
-		chosenBonus.ApplyToBeing(being);
+		if (being.isLocalPlayer || isServer && !(being is ControllableColorBeing))
+		{
+			Bonus chosenBonus = possibleBonuses[UnityEngine.Random.Range(0, possibleBonuses.Count)];
+			chosenBonus.ApplyToBeing(being);
+		}
 	}
 }

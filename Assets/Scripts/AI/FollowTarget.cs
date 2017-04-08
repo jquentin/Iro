@@ -5,7 +5,7 @@ using BehaviorDesigner.Runtime.Tasks;
 using BehaviorDesigner.Runtime;
 
 [TaskCategory("Iro")]
-public class FollowCharacter : IroCharacterAction {
+public class FollowTarget : IroCharacterAction {
 
 	[Tooltip("The character to shoot at")]
 	public SharedGameObject targetGO;
@@ -29,7 +29,8 @@ public class FollowCharacter : IroCharacterAction {
 				controller.velocity = (targetGO.Value.transform.position - this.transform.position).normalized * speed.Value;
 			else
 				controller.velocity = Vector2.zero;
+			return TaskStatus.Running;
 		}
-		return TaskStatus.Running;
+		return TaskStatus.Failure;
 	}
 }

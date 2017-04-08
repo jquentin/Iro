@@ -17,6 +17,11 @@ public class WeaponRadiation : Weapon {
 	[NonSerialized]
 	public bool isIllimitedMode = false;
 
+	public override bool isUpgraded {
+		get {
+			return isIllimitedMode;
+		}
+	}
 
 	public float timeToReload = 0.1f;
 

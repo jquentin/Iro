@@ -20,6 +20,12 @@ public class WeaponMissileLauncher : Weapon {
 	[NonSerialized]
 	public bool isIllimitedMode = false;
 
+	public override bool isUpgraded {
+		get {
+			return isIllimitedMode;
+		}
+	}
+
 	protected void CmdShoot ()
 	{
 		CmdShoot(Vector2.zero);

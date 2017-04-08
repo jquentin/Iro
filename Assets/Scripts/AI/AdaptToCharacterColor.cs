@@ -22,7 +22,7 @@ public class AdaptToCharacterColor : IroCharacterAction {
 	{
 		if (targetGO.Value != null)
 		{
-			float dif = ColorUtils.GetHueDif(being.color, targetGO.Value.GetComponent<ColorBeing>().color);
+			float dif = ColorUtils.GetHueDif(being.color, targetGO.Value.GetComponent<ColorObject>().color);
 			if (Mathf.Abs(dif - targetDistance.Value) > margin.Value)
 				being.CmdChangeHue(speed.Value * Time.deltaTime);
 		}

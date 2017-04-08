@@ -15,6 +15,12 @@ public class WeaponMachineGun : WeaponGun {
 	[SyncVar(hook="OnStraightModeChanged")]
 	public bool isStraightMode = false;
 
+	public override bool isUpgraded {
+		get {
+			return isStraightMode;
+		}
+	}
+
 	[Command]
 	public void CmdSetStraightMode(bool enable)
 	{
@@ -42,17 +48,22 @@ public class WeaponMachineGun : WeaponGun {
 		Shoot (shotAngle);
 	}
 
+	public void TryShoot()
+	{
+		if (Time.time - lastShotTime > timeBetweenShots)
+		{
+			CmdShoot();
+			lastShotTime = Time.time;
+		}
+	}
+
 	void Update()
 	{
 		if (!isLocalPlayer || owner.isDead)
 			return;
 		if (Input.GetMouseButton(0))
 		{
-			if (Time.time - lastShotTime > timeBetweenShots)
-			{
-				CmdShoot();
-				lastShotTime = Time.time;
-			}
+			TryShoot();
 		}
 	}
 

@@ -15,6 +15,12 @@ public class BombDropper : Weapon {
 	[NonSerialized]
 	public bool isIllimitedMode = false;
 
+	public override bool isUpgraded {
+		get {
+			return isIllimitedMode;
+		}
+	}
+
 	bool isReadyToShoot = true;
 
 	[Command]

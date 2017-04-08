@@ -18,6 +18,12 @@ public class WeaponSimpleGun : WeaponGun
 		isLargeMode = enable;
 	} 
 
+	public override bool isUpgraded {
+		get {
+			return isLargeMode;
+		}
+	}
+
 	void OnLargeModeChanged(bool largeModeValue)
 	{
 		isLargeMode = largeModeValue;

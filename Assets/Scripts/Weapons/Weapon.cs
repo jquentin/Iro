@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public abstract class Weapon : TigglyNetworkBehaviour {
+public class Weapon : TigglyNetworkBehaviour {
 
 	ColorBeing _owner;
 	protected ColorBeing owner
@@ -34,5 +34,7 @@ public abstract class Weapon : TigglyNetworkBehaviour {
 			return owner.color;
 		}
 	}
+
+	public virtual bool isUpgraded { get { return false; } }
 
 }

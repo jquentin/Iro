@@ -1,5 +1,6 @@
 using System.Collections;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -105,11 +106,11 @@ public class ColorBeing : ColorObject, Shootable {
 	void Die()
 	{
 		Debug.LogFormat("{0} dead", name);
-		foreach(SpriteRenderer sr in GetComponentsInChildren<SpriteRenderer>(true))
-			sr.color = sr.color.LowerAlpha(0.6f);
+//		foreach(SpriteRenderer sr in GetComponentsInChildren<SpriteRenderer>(true))
+//			sr.color = sr.color.LowerAlpha(0.6f);
 		foreach(Collider2D c in GetComponentsInChildren<Collider2D>(true))
 			c.enabled = false;
-		Invoke("Respawn", 1f);
+		Respawn();
 		if (OnDead != null)
 			OnDead();
 	}
@@ -121,9 +122,8 @@ public class ColorBeing : ColorObject, Shootable {
 	void ActualRespawn()
 	{
 		transform.position = initPos;
-		if (!isLocalPlayer)
-			return;
-		CmdResuscitate();
+		if (isLocalPlayer || isServer && !(this is ControllableColorBeing))
+			CmdResuscitate();
 	}
 
 	[Command]
@@ -132,25 +132,31 @@ public class ColorBeing : ColorObject, Shootable {
 		health = maxHealth;
 	}
 
-	void SetRenderersAlpha(float alpha)
+	void SetRenderersAlpha(float alpha, Dictionary<SpriteRenderer, float> renderersAlpha)
 	{
-		foreach(SpriteRenderer sr in GetComponentsInChildren<SpriteRenderer>(true))
-			sr.color = sr.color.SetAlpha(alpha);
+		foreach(SpriteRenderer sr in renderersAlpha.Keys)
+			sr.color = sr.color.SetAlpha(alpha * renderersAlpha[sr]);
 	}
-
+		
 	IEnumerator Respawn_CR()
 	{
-		SetRenderersAlpha(0f);
+		List<SpriteRenderer> spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true).ToList();
+		Dictionary<SpriteRenderer, float> renderersAlpha = spriteRenderers.ToDictionary(sr => sr, sr => sr.color.a);
+
+		SetRenderersAlpha(0.5f, renderersAlpha);
+		yield return new WaitForSeconds(1f);
+
+		SetRenderersAlpha(0f, renderersAlpha);
 		yield return new WaitForSeconds(0.15f);
-		SetRenderersAlpha(0.5f);
+		SetRenderersAlpha(0.5f, renderersAlpha);
 		yield return new WaitForSeconds(0.15f);
-		SetRenderersAlpha(0f);
+		SetRenderersAlpha(0f, renderersAlpha);
 		yield return new WaitForSeconds(0.15f);
-		SetRenderersAlpha(0.5f);
+		SetRenderersAlpha(0.5f, renderersAlpha);
 		yield return new WaitForSeconds(0.15f);
-		SetRenderersAlpha(0f);
+		SetRenderersAlpha(0f, renderersAlpha);
 		yield return new WaitForSeconds(0.15f);
-		SetRenderersAlpha(1f);
+		SetRenderersAlpha(1f, renderersAlpha);
 		ActualRespawn();
 		yield return new WaitForSeconds(0.15f);
 		foreach(Collider2D c in GetComponentsInChildren<Collider2D>(true))

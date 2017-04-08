@@ -10,7 +10,7 @@ public class IroCharacterController : PlayerController {
 	void Start()
 	{
 		if (isLocalPlayer)
-			playerName = OfflineScene.playerName;
+			CmdSetPlayerName(OfflineScene.playerName);
 	}
 
 	void FixedUpdate () 

@@ -8,6 +8,12 @@ public class PlayerController : NetworkBehaviour {
 	[SyncVar]
 	public string playerName;
 
+	[Command]
+	protected void CmdSetPlayerName(string playerName)
+	{
+		this.playerName = playerName;
+	}
+
 	public float moveSpeed = 1f;
 
 	public Transform body;

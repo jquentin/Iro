@@ -67,6 +67,8 @@ public class CharacterBuilder : NetworkBehaviour {
 			if (bodies != null && bodies.Count > 0)
 				CmdSelectBody();
 			CmdSelectColor();
+			Camera.main.transform.parent = this.transform;
+			Camera.main.transform.localPosition = new Vector3(0f, 0f, Camera.main.transform.localPosition.z);
 		}
 //		else
 //		{
@@ -90,11 +92,11 @@ public class CharacterBuilder : NetworkBehaviour {
 		colorBeing.color = color;
 	}
 
-	void Update()
-	{
-		if (instantiatedBody == null && selectedBodyIndex >= 0)
-			SpawnBody(selectedBodyIndex);
-	}
+//	void Update()
+//	{
+//		if (instantiatedBody == null && selectedBodyIndex >= 0)
+//			SpawnBody(selectedBodyIndex);
+//	}
 
 	void OnSelectedBodyIndex(int selectedBody)
 	{

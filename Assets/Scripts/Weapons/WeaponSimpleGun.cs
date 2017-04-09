@@ -65,6 +65,7 @@ public class WeaponSimpleGun : WeaponGun
 	[ClientRpc]
 	protected void RpcPlayShootSound ()
 	{
-		audioSource.PlayOneShotControlled(shootSound, AudioType.Sound);
+		gunAudioSource.pitch = isLargeMode ? 0.7f : 1f;
+		gunAudioSource.PlayOneShotControlled(shootSound, AudioType.Sound);
 	}
 }

@@ -20,7 +20,7 @@ public class ColorBullet : ColorObject {
 		{
 			shootable.BeShot(color, force, GetComponent<Rigidbody2D>().velocity);
 			Destroy(gameObject);
-			Explosion.CreateExplosion(explosionPrefab, transform.position, transform.localScale.x, color, false);
+			Explosion.CreateExplosion(explosionPrefab, transform.position, transform.localScale.x, color, true);
 		}
 	}
 

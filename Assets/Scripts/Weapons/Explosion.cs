@@ -12,7 +12,9 @@ public class Explosion : ColorObject
 	void RpcInit(float scale, Color color, bool playSound)
 	{
 		if (playSound)
+		{
 			audioSource.PlayOneShotControlled(explodeSound, AudioType.Sound);
+		}
 		this.color = color;
 		iTween.ScaleTo(gameObject, iTween.Hash(
 			"scale", transform.localScale * scale,

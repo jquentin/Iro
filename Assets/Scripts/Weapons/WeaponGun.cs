@@ -19,6 +19,18 @@ public abstract class WeaponGun : Weapon {
 		get;
 	}
 
+	// A specific audio source so we can play with the pitch without affecting other sfx
+	AudioSource _gunAudioSource;
+	protected AudioSource gunAudioSource
+	{
+		get
+		{
+			if (_gunAudioSource == null)
+				_gunAudioSource = this.gameObject.AddComponent<AudioSource>();
+			return _gunAudioSource;
+		}
+	}
+
 	protected void Shoot (float angleShift)
 	{
 		if (!isServer)

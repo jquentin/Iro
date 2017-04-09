@@ -18,22 +18,32 @@ public class FollowTarget : IroCharacterAction {
 
 	public SharedFloat updatePathDelay;
 
+	[Tooltip("Move around the target once it's at an accepted distance")]
+	public SharedBool moveAroundWhenReached;
+
+	[Tooltip("The time it will take between direction changes when moving around the target after it's reached")]
+	public SharedFloat timePingPongMoveAround;
+
 	Pathfinding.Path currentPath;
 	int currentPathIndex;
 	bool isCalculatingPath = false;
 
 	float lastUpdatePath;
 
+	bool isMovingAround = false;
+	bool isMovingAroundTrigo;
+
 	public override TaskStatus OnUpdate ()
 	{
 		Debug.Log(targetGO.Value);
 		if (targetGO.Value != null)
 		{
-			float distance = (targetGO.Value.transform.position - this.transform.position).magnitude;
+			Vector2 difToTarget = targetGO.Value.transform.position - this.transform.position;
+			float distanceToTarget = difToTarget.magnitude;
 			if (!isCalculatingPath && Time.time > lastUpdatePath + updatePathDelay.Value)
 			{
 				Vector3 target = targetGO.Value.transform.position;
-				if (distance < minDistance.Value)
+				if (distanceToTarget < minDistance.Value)
 					target = this.transform.position - (targetGO.Value.transform.position - this.transform.position).normalized * 100f;
 				Seeker seeker = controller.GetComponent<Seeker>();
 				isCalculatingPath = true;
@@ -42,8 +52,8 @@ public class FollowTarget : IroCharacterAction {
 			if (currentPath != null && currentPath.vectorPath.Count > currentPathIndex)
 			{
 				Vector3 nextTarget = currentPath.vectorPath[currentPathIndex];
-				Vector2 dif = nextTarget - this.transform.position;
-				while (dif.magnitude < 0.1f)
+				Vector2 difToNextNode = nextTarget - this.transform.position;
+				while (difToNextNode.magnitude < 0.1f)
 				{
 					currentPathIndex++;
 					if (currentPathIndex >= currentPath.vectorPath.Count)
@@ -52,10 +62,26 @@ public class FollowTarget : IroCharacterAction {
 						break;
 					}
 					nextTarget = currentPath.vectorPath[currentPathIndex];
-					dif = nextTarget - this.transform.position;
+					difToNextNode = nextTarget - this.transform.position;
 				}
-				if (distance < minDistance.Value || distance > maxDistance.Value)
+				if (distanceToTarget < minDistance.Value || distanceToTarget > maxDistance.Value)
+				{
 					controller.velocity = (nextTarget - this.transform.position).normalized * speed.Value;
+					if (isMovingAround)
+					{
+						StopCoroutine("ChangeMoveAroundDirection");
+						isMovingAround = false;
+					}
+				}
+				else if (moveAroundWhenReached.Value)
+				{
+					if (!isMovingAround)
+					{
+						StartCoroutine("ChangeMoveAroundDirection");
+						isMovingAround = true;
+					}
+					controller.velocity = Vector3.Cross(difToTarget, isMovingAroundTrigo ? Vector3.forward : Vector3.back);
+				}
 				else
 					controller.velocity = Vector2.zero;
 			}
@@ -71,5 +97,15 @@ public class FollowTarget : IroCharacterAction {
 			return TaskStatus.Running;
 		}
 		return TaskStatus.Failure;
+	}
+
+	IEnumerator ChangeMoveAroundDirection()
+	{
+		yield return new WaitForSeconds(0.5f * timePingPongMoveAround.Value);
+		while(true)
+		{
+			isMovingAroundTrigo = !isMovingAroundTrigo;
+			yield return new WaitForSeconds(timePingPongMoveAround.Value);
+		}
 	}
 }

@@ -76,8 +76,8 @@ public class ColorBeing : ColorObject, Shootable {
 			return;
 		float hue = c.GetHue();
 		float hueDif = ColorUtils.GetHueDif(this.hue, hue);
-//		Debug.LogFormat("hue dif = {0}", hueDif);
 		float hitFactor = CalculateHitFactor(hueDif);
+//		Debug.LogFormat("color shooter = {0} : hue: {1} ; color shootee = {2} : hue: {3} ; hue dif = {4} ; hitFactor = {5}", c, hue, this.color, this.hue, hueDif, hitFactor);
 		int damage = CalculateDamage(hitFactor, force);
 		health = Mathf.Min(health - damage, maxHealth);
 		RpcSpawnHealthChange(damage, hitFactor);

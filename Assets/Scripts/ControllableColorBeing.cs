@@ -60,9 +60,7 @@ public class ControllableColorBeing : ColorBeing {
 	protected override void OnColorChangedVirtual (Color color)
 	{
 		base.OnColorChangedVirtual (color);
-		float h,s,v;
-		Color.RGBToHSV(color, out h, out s, out v);
-		RpcUpdateSelector(h);
+		RpcUpdateSelector(color.GetHue());
 	}
 
 }

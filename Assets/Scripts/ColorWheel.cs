@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ColorWheel : MonoBehaviour {
 
-	public Transform selectorPivot;
+	public ColorWheelSelector selectorPivot;
+
+	Dictionary<ColorBeing, ColorWheelSelector> otherPlayersSelectors = new Dictionary<ColorBeing, ColorWheelSelector>();
 
 	public bool isShowing
 	{
@@ -27,7 +29,23 @@ public class ColorWheel : MonoBehaviour {
 	public void UpdateSelector(float hue)
 	{
 		transform.localRotation = Quaternion.Euler(0f, 0f, -hue * 360f);
-		selectorPivot.localRotation = Quaternion.Euler(0f, 0f, hue * 360f);
-		selectorPivot.GetComponentInChildren<SpriteRenderer>().color = Color.HSVToRGB((hue + 0.5f) % 1f, 1f, 1f);
+		selectorPivot.SetValue(hue);
+//		selectorPivot.GetComponentInChildren<SpriteRenderer>().color = Color.HSVToRGB((hue + 0.5f) % 1f, 1f, 1f);
+	}
+
+	public void UpdateSelector(ColorBeing being, float hue)
+	{
+		if (!otherPlayersSelectors.ContainsKey(being))
+		{
+			ColorWheelSelector newPivot = Instantiate(selectorPivot, this.transform);
+			otherPlayersSelectors.Add(being, newPivot);
+			newPivot.SetName(being.playerName);
+		}
+		UpdateSelector(otherPlayersSelectors[being], hue);
+	}
+
+	void UpdateSelector(ColorWheelSelector pivot, float hue)
+	{
+		pivot.SetValue(hue);
 	}
 }

@@ -37,6 +37,19 @@ public class ColorBeing : ColorObject, Shootable {
 		}
 	}
 
+	PlayerController _controller;
+	PlayerController controller
+	{
+		get
+		{
+			if (_controller == null)
+				_controller = GetComponent<PlayerController>();
+			return _controller;
+		}
+	}
+
+	public string playerName { get { return controller.playerName; } }
+
 	protected override void Start()
 	{
 		base.Start();
@@ -181,6 +194,17 @@ public class ColorBeing : ColorObject, Shootable {
 			return Mathf.FloorToInt(force * hitFactor);
 	}
 
-
+	protected override void OnColorChangedVirtual (Color color)
+	{
+		base.OnColorChangedVirtual (color);
+		if (!isLocalPlayer)
+		{
+			GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
+			if (playerGO == null) return;
+			ColorWheel playerColorWheel = playerGO.GetComponentInChildren<ColorWheel>();
+			if (playerColorWheel == null) return;
+			playerColorWheel.UpdateSelector(this, color.GetHue());
+		}
+	}
 
 }

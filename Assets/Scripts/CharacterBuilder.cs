@@ -22,6 +22,7 @@ public class CharacterBuilder : NetworkBehaviour {
 //		Init();
 //	}
 
+	// Now used only in context menu and not runtime, because the network is messed if we replace the components at runtime
 	[ContextMenu("Init")]
 	public void Init () 
 	{
@@ -69,6 +70,7 @@ public class CharacterBuilder : NetworkBehaviour {
 			CmdSelectColor();
 			Camera.main.transform.parent = this.transform;
 			Camera.main.transform.localPosition = new Vector3(0f, 0f, Camera.main.transform.localPosition.z);
+			gameObject.tag = "Player";
 		}
 //		else
 //		{

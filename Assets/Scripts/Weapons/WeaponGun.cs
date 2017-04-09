@@ -33,6 +33,13 @@ public abstract class WeaponGun : Weapon {
 		bullet.transform.parent = null;
 		bullet.Shoot(controller.angle + angleShift, bulletSpeed);
 		NetworkServer.Spawn(bullet.gameObject);
+		RpcShootingEffects();
+	}
+
+	[ClientRpc]
+	void RpcShootingEffects()
+	{
+		GetComponentInChildren<CharacterBodyController>().Shoot();
 	}
 
 	protected abstract void PlayShootSoundOnClients();

@@ -36,14 +36,21 @@ public class GlobalControlManager : TigglyNetworkBehaviour {
 	}
 	void OfflineSpawnAiPlayer()
 	{		
-		CharacterBuilder spawnedAI = Instantiate(aiPlayerPrefab);
-//		spawnedAI.isPlayable = false;
-//		spawnedAI.Init();
-		spawnedAI.transform.position = GameObject.FindObjectsOfType<NetworkStartPosition>().ToList().PickRandomElement().transform.position;
-		SpawnIfOnline(spawnedAI.gameObject);
+		SpawnPlayer(aiPlayerPrefab.gameObject);
 	}
-	void SpawnAiPlayer()
+	public void SpawnAiPlayer()
 	{
 		ModeDependantCall(CmdSpawnAiPlayer, OfflineSpawnAiPlayer);
 	}
+
+	public static GameObject SpawnPlayer(GameObject playerPrefab)
+	{
+		GameObject spawned = Instantiate(playerPrefab);
+		List<NetworkStartPosition> startPositions = GameObject.FindObjectsOfType<NetworkStartPosition>().ToList();
+		RandomExhaustInt re = new RandomExhaustInt(0, startPositions.Count - 1, ExclusionMode.FixedRandomizedElmts, 1, "startPositions");
+		spawned.transform.position = startPositions[re.Pick()].transform.position;
+		SpawnIfOnline(spawned.gameObject);
+		return spawned;
+	}
+
 }

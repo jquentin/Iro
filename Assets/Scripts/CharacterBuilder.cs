@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class CharacterBuilder : NetworkBehaviour {
+public class CharacterBuilder : TigglyNetworkBehaviour {
 
 	public bool isPlayable;
 
@@ -66,8 +66,8 @@ public class CharacterBuilder : NetworkBehaviour {
 		if (isLocalPlayer)
 		{
 			if (bodies != null && bodies.Count > 0)
-				CmdSelectBody();
-			CmdSelectColor();
+				ModeDependantCall(CmdSelectBody, SelectBody);
+			ModeDependantCall(CmdSelectColor, SelectColor);
 			Camera.main.transform.parent = this.transform;
 			Camera.main.transform.localPosition = new Vector3(0f, 0f, Camera.main.transform.localPosition.z);
 			gameObject.tag = "Player";
@@ -81,12 +81,20 @@ public class CharacterBuilder : NetworkBehaviour {
 	[Command]
 	void CmdSelectBody()
 	{
+		SelectBody();
+	}
+	void SelectBody()
+	{
 		RandomExhaustInt chosenBodies = new RandomExhaustInt(0, bodies.Count - 1, ExclusionMode.FixedRandomizedElmts, 1, "ChosenBodies", bodies.Count);
 		selectedBodyIndex = chosenBodies.Pick();
 //		RpcSpawnBody(selectedBodyIndex);
 	}
 	[Command]
 	void CmdSelectColor()
+	{
+		SelectColor();
+	}
+	void SelectColor()
 	{
 		Color color = Color.HSVToRGB(0.25f * chosenColors, 1f, 1f);
 		chosenColors = (chosenColors + 1) % 4;

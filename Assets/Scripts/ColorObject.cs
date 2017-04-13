@@ -6,7 +6,8 @@ using UnityEngine.Networking;
 public class ColorObject : TigglyNetworkBehaviour {
 
 	[SyncVar(hook="OnColorChanged")]
-	public Color color;
+	Color _color;
+	public Color color { get { return _color; } set { _color = value; if (offlineMode) OnColorChanged(value); } }
 
 	protected float hue
 	{
@@ -38,7 +39,7 @@ public class ColorObject : TigglyNetworkBehaviour {
 
 	void OnColorChanged(Color color)
 	{
-		this.color = color;
+		this._color = color;
 		UpdateColorSprites();
 		OnColorChangedVirtual(color);
 	}

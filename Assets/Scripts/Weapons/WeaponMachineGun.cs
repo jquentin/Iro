@@ -22,10 +22,18 @@ public class WeaponMachineGun : WeaponGun {
 	}
 
 	[Command]
-	public void CmdSetStraightMode(bool enable)
+	void CmdSetStraightMode(bool enable)
+	{
+		OfflineSetStraightMode(enable);
+	}
+	void OfflineSetStraightMode(bool enable)
 	{
 		isStraightMode = enable;
 	} 
+	public void SetStraightMode(bool enable)
+	{
+		ModeDependantCall(CmdSetStraightMode, OfflineSetStraightMode, enable);
+	}
 
 	void OnStraightModeChanged(bool largeModeValue)
 	{
@@ -42,17 +50,26 @@ public class WeaponMachineGun : WeaponGun {
 	}
 
 	[Command]
-	protected void CmdShoot ()
+	void CmdShoot ()
+	{
+		OfflineShoot();
+	}
+	void OfflineShoot ()
 	{
 		float shotAngle = isStraightMode ? 0f : UnityEngine.Random.Range(-angleVariation, angleVariation);
 		Shoot (shotAngle);
 	}
+	protected void Shoot ()
+	{
+		ModeDependantCall(CmdShoot, OfflineShoot);
+	}
+
 
 	public void TryShoot()
 	{
 		if (Time.time - lastShotTime > timeBetweenShots)
 		{
-			CmdShoot();
+			Shoot();
 			lastShotTime = Time.time;
 		}
 	}
@@ -69,14 +86,22 @@ public class WeaponMachineGun : WeaponGun {
 
 	protected override void PlayShootSoundOnClients ()
 	{
-		RpcPlayShootSound();
+		PlayShootSound();
 	}
 
 	[ClientRpc]
-	protected void RpcPlayShootSound ()
+	void RpcPlayShootSound ()
+	{
+		OfflinePlayShootSound();
+	}
+	void OfflinePlayShootSound ()
 	{
 		gunAudioSource.pitch = 1.3f;
 		gunAudioSource.PlayOneShotControlled(shootSound, AudioType.Sound);
+	}
+	protected void PlayShootSound ()
+	{
+		ModeDependantCall(RpcPlayShootSound, OfflinePlayShootSound);
 	}
 
 }

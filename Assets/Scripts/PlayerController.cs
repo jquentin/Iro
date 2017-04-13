@@ -3,15 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class PlayerController : NetworkBehaviour {
+public class PlayerController : TigglyNetworkBehaviour {
 	
 	[SyncVar]
 	public string playerName;
 
 	[Command]
-	protected void CmdSetPlayerName(string playerName)
+	void CmdSetPlayerName(string playerName)
+	{
+		OfflineSetPlayerName(playerName);
+	}
+	void OfflineSetPlayerName(string playerName)
 	{
 		this.playerName = playerName;
+	}
+	protected void SetPlayerName(string playerName)
+	{
+		ModeDependantCall(CmdSetPlayerName, OfflineSetPlayerName, playerName);
 	}
 
 	public float moveSpeed = 1f;

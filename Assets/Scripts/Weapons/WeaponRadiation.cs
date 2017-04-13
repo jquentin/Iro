@@ -30,13 +30,29 @@ public class WeaponRadiation : Weapon {
 	[Command]
 	protected void CmdStartRadiate ()
 	{
+		OfflineStartRadiate();
+	}
+	protected void OfflineStartRadiate ()
+	{
 		isActivated = true;
+	}
+	protected void StartRadiate ()
+	{
+		ModeDependantCall(CmdStartRadiate, OfflineStartRadiate);
 	}
 
 	[Command]
 	protected void CmdStopRadiate ()
 	{
+		OfflineStopRadiate();
+	}
+	protected void OfflineStopRadiate ()
+	{
 		isActivated = false;
+	}
+	protected void StopRadiate ()
+	{
+		ModeDependantCall(CmdStopRadiate, OfflineStopRadiate);
 	}
 
 	void OnActiveStateChanged(bool activated)
@@ -89,11 +105,11 @@ public class WeaponRadiation : Weapon {
 			return;
 		if (Input.GetMouseButtonDown(0))
 		{
-			CmdStartRadiate();
+			StartRadiate();
 		}
 		else if (Input.GetMouseButtonUp(0))
 		{
-			CmdStopRadiate();
+			StopRadiate();
 		}
 	}
 

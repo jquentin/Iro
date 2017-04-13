@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class BonusBoxSpawner : NetworkBehaviour {
+public class BonusBoxSpawner : TigglyNetworkBehaviour {
 
 	public float timeBetweenSpawns = 10f;
 
@@ -49,7 +49,7 @@ public class BonusBoxSpawner : NetworkBehaviour {
 //		BonusBox createdBox = Instantiate(bonusBoxPrefab, chosenSpawner.position, Quaternion.identity);
 		BonusBox createdBox = BonusBox.CreateBonusBox(bonusBoxPrefab, chosenSpawner.position, Color.HSVToRGB(Random.Range(0f, 1f), 1f, 1f));
 		spawnedBonusBoxes.Add(chosenSpawner, createdBox);
-		NetworkServer.Spawn(createdBox.gameObject);
+		SpawnIfOnline(createdBox.gameObject);
 		timeLastSpawn = Time.time;
 	}
 

@@ -24,7 +24,7 @@ public class AdaptToCharacterColor : IroCharacterAction {
 		{
 			float dif = ColorUtils.GetHueDif(being.color, targetGO.Value.GetComponent<ColorObject>().color);
 			if (Mathf.Abs(dif - targetDistance.Value) > margin.Value)
-				being.CmdChangeHue(speed.Value * Time.deltaTime);
+				being.ChangeHue(speed.Value * Time.deltaTime);
 		}
 		return TaskStatus.Running;
 	}

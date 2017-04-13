@@ -8,7 +8,8 @@ public abstract class WeaponContainer : TigglyNetworkBehaviour {
 	public List<Weapon> weaponComponents;
 
 	[SyncVar(hook="OnChangeWeapon")]
-	public int currentWeaponIndex;
+	int _currentWeaponIndex;
+	public int currentWeaponIndex { get { return _currentWeaponIndex; } set { _currentWeaponIndex = value; if (offlineMode) OnChangeWeapon(value); } }
 	Weapon currentWeapon;
 
 	void Start () 
@@ -18,7 +19,11 @@ public abstract class WeaponContainer : TigglyNetworkBehaviour {
 	}
 
 	[Command]
-	protected void CmdSetWeapon(int index)
+	void CmdSetWeapon(int index)
+	{
+		OfflineSetWeapon(index);
+	}
+	void OfflineSetWeapon(int index)
 	{
 		Debug.Log("CmdSetWeapon");
 //		for (int i = 0 ; i < weaponComponents.Count ; i++)
@@ -26,6 +31,10 @@ public abstract class WeaponContainer : TigglyNetworkBehaviour {
 //			weaponComponents[i].enabled = (index == i);
 //		}
 		currentWeaponIndex = index;
+	}
+	protected void SetWeapon(int index)
+	{
+		ModeDependantCall(CmdSetWeapon, OfflineSetWeapon, index);
 	}
 
 	void OnChangeWeapon(int weaponIndex)

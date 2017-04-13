@@ -19,7 +19,7 @@ public class AICharacterController : PlayerController {
 	{
 		if (isServer)
 		{
-			CmdSetPlayerName(string.Format("AI-{0}", indexAI));
+			SetPlayerName(string.Format("AI-{0}", indexAI));
 			indexAI++;
 		}
 	}

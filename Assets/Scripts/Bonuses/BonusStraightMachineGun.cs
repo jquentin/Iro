@@ -6,11 +6,11 @@ public class BonusStraightMachineGun : Bonus {
 	
 	protected override void ApplyBonusEffects ()
 	{
-		being.GetComponent<WeaponMachineGun>().CmdSetStraightMode(true);
+		being.GetComponent<WeaponMachineGun>().SetStraightMode(true);
 	}
 
 	protected override void FinishBonusEffects ()
 	{
-		being.GetComponent<WeaponMachineGun>().CmdSetStraightMode(false);
+		being.GetComponent<WeaponMachineGun>().SetStraightMode(false);
 	}
 }

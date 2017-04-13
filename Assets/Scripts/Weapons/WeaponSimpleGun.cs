@@ -13,9 +13,17 @@ public class WeaponSimpleGun : WeaponGun
 	public bool isLargeMode = false;
 
 	[Command]
-	public void CmdSetLargeMode(bool enable)
+	void CmdSetLargeMode(bool enable)
+	{
+		OfflineSetLargeMode(enable);
+	}
+	void OfflineSetLargeMode(bool enable)
 	{
 		isLargeMode = enable;
+	} 
+	public void SetLargeMode(bool enable)
+	{
+		ModeDependantCall(CmdSetLargeMode, OfflineSetLargeMode, enable);
 	} 
 
 	public override bool isUpgraded {
@@ -42,9 +50,17 @@ public class WeaponSimpleGun : WeaponGun
 	}
 
 	[Command]
-	public void CmdShoot ()
+	void CmdShoot ()
+	{
+		OfflineShoot ();
+	}
+	void OfflineShoot()
 	{
 		Shoot(0f);
+	}
+	public void Shoot ()
+	{
+		ModeDependantCall(CmdShoot, OfflineShoot);
 	}
 
 	void Update()
@@ -53,19 +69,27 @@ public class WeaponSimpleGun : WeaponGun
 			return;
 		if (Input.GetMouseButtonDown(0))
 		{
-			CmdShoot();
+			Shoot();
 		}
 	}
 
 	protected override void PlayShootSoundOnClients ()
 	{
-		RpcPlayShootSound();
+		PlayShootSound();
 	}
 
 	[ClientRpc]
-	protected void RpcPlayShootSound ()
+	void RpcPlayShootSound ()
+	{
+		OfflinePlayShootSound();
+	}
+	void OfflinePlayShootSound ()
 	{
 		gunAudioSource.pitch = isLargeMode ? 0.7f : 1f;
 		gunAudioSource.PlayOneShotControlled(shootSound, AudioType.Sound);
+	}
+	protected void PlayShootSound ()
+	{
+		ModeDependantCall(RpcPlayShootSound, OfflinePlayShootSound);
 	}
 }

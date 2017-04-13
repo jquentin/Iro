@@ -27,7 +27,15 @@ public class ControllableColorBeing : ColorBeing {
 	[ClientRpc]
 	void RpcUpdateSelector(float hue)
 	{
+		OfflineUpdateSelector(hue);
+	}
+	void OfflineUpdateSelector(float hue)
+	{
 		colorWheel.UpdateSelector(hue);
+	}
+	void UpdateSelector(float hue)
+	{
+		ModeDependantCall(RpcUpdateSelector, OfflineUpdateSelector, hue);
 	}
 
 	protected override void Update()
@@ -40,7 +48,7 @@ public class ControllableColorBeing : ColorBeing {
 		{
 			if (!colorWheel.isShowing)
 				colorWheel.Show();
-			CmdChangeHue(colorWheelSpeed * mouseWheel);
+			ChangeHue(colorWheelSpeed * mouseWheel);
 			this.AddTimeout(0.4f, HueIsStill, CloseColorWheel, true);
 		}
 		hueIsChanging = (mouseWheel != 0f);
@@ -60,7 +68,7 @@ public class ControllableColorBeing : ColorBeing {
 	protected override void OnColorChangedVirtual (Color color)
 	{
 		base.OnColorChangedVirtual (color);
-		RpcUpdateSelector(color.GetHue());
+		UpdateSelector(color.GetHue());
 	}
 
 }

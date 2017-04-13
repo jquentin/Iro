@@ -24,7 +24,7 @@ public class PlayerWeaponContainer : WeaponContainer {
 		for (int i = 0 ; i < keys.Count ; i++)
 		{
 			if (Input.GetKeyDown(keys[i]))
-				CmdSetWeapon(i);
+				SetWeapon(i);
 		}
 	}
 

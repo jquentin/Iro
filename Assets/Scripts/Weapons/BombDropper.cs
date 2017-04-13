@@ -26,9 +26,17 @@ public class BombDropper : Weapon {
 	[Command]
 	protected void CmdDropBomb ()
 	{
+		OfflineDropBomb();
+	}
+	protected void OfflineDropBomb ()
+	{
 		Bomb bomb = Instantiate(bombPrefab, transform.position, Quaternion.identity);
 		bomb.color = this.color;
-		NetworkServer.Spawn(bomb.gameObject);
+		SpawnIfOnline(bomb.gameObject);
+	}
+	protected void DropBomb ()
+	{
+		ModeDependantCall(CmdDropBomb, OfflineDropBomb);
 	}
 
 	protected virtual void Update()
@@ -42,7 +50,7 @@ public class BombDropper : Weapon {
 //				audioSource.PlayOneShotControlled(missileNotReadySound, AudioType.Sound);
 				return;
 			}
-			CmdDropBomb();
+			DropBomb();
 			isReadyToShoot = false;
 			CancelInvoke("Reload");
 			Invoke("Reload", bombPrefab.timeBeforeExplosion);

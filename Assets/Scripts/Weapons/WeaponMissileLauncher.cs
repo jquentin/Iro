@@ -28,13 +28,17 @@ public class WeaponMissileLauncher : Weapon {
 
 	protected void CmdShoot ()
 	{
-		CmdShoot(Vector2.zero);
+		Shoot(Vector2.zero);
 	}
 
 	[Command]
 	protected void CmdShoot (Vector2 target)
 	{
-		RpcPlayMissileSound();
+		OfflineShoot(target);
+	}
+	protected void OfflineShoot (Vector2 target)
+	{
+		PlayMissileSound();
 		ColorMissile missile = Instantiate(missilePrefab, gunEnd);
 		missile.color = this.color;
 		missile.transform.localPosition = Vector3.zero;
@@ -42,11 +46,23 @@ public class WeaponMissileLauncher : Weapon {
 		missile.transform.parent = null;
 		missile.Shoot(target);
 	}
+	protected void Shoot (Vector2 target)
+	{
+		ModeDependantCall(CmdShoot, OfflineShoot, target);
+	}
 
 	[ClientRpc]
 	void RpcPlayMissileSound()
 	{
+		OfflinePlayMissileSound();
+	}
+	void OfflinePlayMissileSound()
+	{
 		audioSource.PlayOneShotControlled(missileSound, AudioType.Sound);
+	}
+	void PlayMissileSound()
+	{
+		ModeDependantCall(RpcPlayMissileSound, OfflinePlayMissileSound);
 	}
 
 	protected virtual void Update()
@@ -61,7 +77,7 @@ public class WeaponMissileLauncher : Weapon {
 				return;
 			}
 			Vector2 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			CmdShoot(target);
+			Shoot(target);
 			isReadyToShoot = false;
 			CancelInvoke("Reload");
 			Invoke("Reload", timeToReload);

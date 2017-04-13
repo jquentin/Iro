@@ -44,14 +44,22 @@ public abstract class WeaponGun : Weapon {
 		bullet.transform.localRotation = bulletPrefab.transform.localRotation;
 		bullet.transform.parent = null;
 		bullet.Shoot(controller.angle + angleShift, bulletSpeed);
-		NetworkServer.Spawn(bullet.gameObject);
-		RpcShootingEffects();
+		SpawnIfOnline(bullet.gameObject);
+		ShootingEffects();
 	}
 
 	[ClientRpc]
 	void RpcShootingEffects()
 	{
+		OfflineShootingEffects();
+	}
+	void OfflineShootingEffects()
+	{
 		GetComponentInChildren<CharacterBodyController>().Shoot();
+	}
+	void ShootingEffects()
+	{
+		ModeDependantCall(RpcShootingEffects, OfflineShootingEffects);
 	}
 
 	protected abstract void PlayShootSoundOnClients();

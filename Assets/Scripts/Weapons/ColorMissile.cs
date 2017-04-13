@@ -25,18 +25,26 @@ public class ColorMissile : ColorObject {
 		float speed = (target - pos).magnitude / timeToTarget;
 		GetComponent<Rigidbody2D>().velocity = speed * (target - pos).normalized;
 		Invoke("Explode", timeToTarget);
-		NetworkServer.Spawn(gameObject);
-		RpcGoUp();
+		SpawnIfOnline(gameObject);
+		GoUp();
 	}
 
 	[ClientRpc]
 	void RpcGoUp()
+	{
+		OfflineGoUp();
+	}
+	void OfflineGoUp()
 	{
 		iTween.ScaleTo(gameObject, iTween.Hash(
 			"scale", 2.5f * initScale,
 			"time", timeToTarget * 0.5f,
 			"easetype", iTween.EaseType.easeOutSine,
 			"oncomplete", "GoDown"));
+	}
+	void GoUp()
+	{
+		ModeDependantCall(RpcGoUp, OfflineGoUp);
 	}
 
 	void GoDown()

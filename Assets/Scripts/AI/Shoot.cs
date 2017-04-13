@@ -37,7 +37,7 @@ public class Shoot : IroCharacterAction {
 			controller.angle = PlayerController.SignedAngle(targetGO.Value.transform.position - this.transform.position);
 		if (Time.time - timeStart >= timeBeforeEnd)
 		{
-			gun.CmdShoot();
+			gun.Shoot();
 			timeStart = Time.time;
 		}
 		return TaskStatus.Running;

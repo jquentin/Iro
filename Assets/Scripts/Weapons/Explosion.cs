@@ -11,6 +11,10 @@ public class Explosion : ColorObject
 	[ClientRpc]
 	void RpcInit(float scale, Color color, bool playSound)
 	{
+		OfflineInit(scale, color, playSound);
+	}
+	void OfflineInit(float scale, Color color, bool playSound)
+	{
 		if (playSound)
 		{
 			audioSource.PlayOneShotControlled(explodeSound, AudioType.Sound);
@@ -22,12 +26,16 @@ public class Explosion : ColorObject
 			"oncomplete", "DestroyExlosion"));
 		iTween.FadeTo(gameObject, 0f, 0.5f);
 	}
+	void Init(float scale, Color color, bool playSound)
+	{
+		ModeDependantCall(RpcInit, OfflineInit, scale, color, playSound);
+	}
 
 	public static void CreateExplosion(Explosion explosionPrefab, Vector2 pos, float scale, Color color, bool playSound = true)
 	{
 		Explosion explosion = Instantiate(explosionPrefab, pos, Quaternion.identity);
-		NetworkServer.Spawn(explosion.gameObject);
-		explosion.RpcInit(scale, color, playSound);
+		SpawnIfOnline(explosion.gameObject);
+		explosion.Init(scale, color, playSound);
 
 //		Collider2D[] colliders = Physics2D.OverlapCircleAll(pos, scale * 10f);
 //		foreach(Collider2D collider in colliders)

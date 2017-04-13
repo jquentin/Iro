@@ -80,25 +80,41 @@ public class ColorBeing : ColorObject, Shootable {
 //		Debug.LogFormat("color shooter = {0} : hue: {1} ; color shootee = {2} : hue: {3} ; hue dif = {4} ; hitFactor = {5}", c, hue, this.color, this.hue, hueDif, hitFactor);
 		int damage = CalculateDamage(hitFactor, force);
 		health = Mathf.Min(health - damage, maxHealth);
-		RpcSpawnHealthChange(damage, hitFactor);
+		SpawnHealthChange(damage, hitFactor);
 		Vector2 push = ((pushForce < 0f) ? force : pushForce) * direction.normalized;
-		RpcGetPushed(push);
+		GetPushed(push);
 	}
 
 	[Command]
-	public void CmdChangeHue(float value)
+	void CmdChangeHue(float value)
+	{
+		OfflineChangeHue(value);
+	}
+	void OfflineChangeHue(float value)
 	{
 		float h, s, v;
 		Color.RGBToHSV(this.color, out h, out s, out v);
 		h += value % 1f;
 		this.color = Color.HSVToRGB(h, 1f, 1f);
 	}
+	public void ChangeHue(float value)
+	{
+		ModeDependantCall(CmdChangeHue, OfflineChangeHue, value);
+	}
 
 	[ClientRpc]
 	void RpcGetPushed(Vector2 force)
 	{
+		OfflineGetPushed(force);
+	}
+	void OfflineGetPushed(Vector2 force)
+	{
 		GetComponent<PlayerController>().GetRecoil();
 		GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
+	}
+	void GetPushed(Vector2 force)
+	{
+		ModeDependantCall(RpcGetPushed, OfflineGetPushed, force);
 	}
 
 	void OnHealthChanged(int health)
@@ -112,8 +128,16 @@ public class ColorBeing : ColorObject, Shootable {
 	[ClientRpc]
 	void RpcSpawnHealthChange(int damage, float hitFactor)
 	{
+		OfflineSpawnHealthChange(damage, hitFactor);
+	}
+	void OfflineSpawnHealthChange(int damage, float hitFactor)
+	{
 		Debug.LogFormat("{0} shot by damage: {1}, leftHealth: {2}", name, damage, health);
 		hpChangeSpawner.HealthChange(-damage, hitFactor);
+	}
+	void SpawnHealthChange(int damage, float hitFactor)
+	{
+		ModeDependantCall(RpcSpawnHealthChange, OfflineSpawnHealthChange, damage, hitFactor);
 	}
 
 	void Die()
@@ -136,13 +160,21 @@ public class ColorBeing : ColorObject, Shootable {
 	{
 		transform.position = initPos;
 		if (isLocalPlayer || isServer && !(this is ControllableColorBeing))
-			CmdResuscitate();
+			Resuscitate();
 	}
 
-	[Command]
+	[Command]    
 	void CmdResuscitate()
-	{
+	{  
+		OfflineResuscitate();  
+	}  
+	void OfflineResuscitate()
+	{   
 		health = maxHealth;
+	}   
+	void Resuscitate()
+	{ 
+		ModeDependantCall(CmdResuscitate, OfflineResuscitate);   
 	}
 
 	void SetRenderersAlpha(float alpha, Dictionary<SpriteRenderer, float> renderersAlpha)

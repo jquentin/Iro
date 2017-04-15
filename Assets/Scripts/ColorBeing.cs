@@ -16,7 +16,20 @@ public class ColorBeing : ColorObject, Shootable {
 
 	public int maxHealth = 10;
 	[SyncVar(hook = "OnHealthChanged")]
-	public int health;
+	public int _health;
+	public int health 
+	{
+		get
+		{
+			return _health;
+		} 
+		set 
+		{ 
+			_health = value; 
+			if (offlineMode) 
+				OnHealthChanged(value); 
+		} 
+	}
 
 	public HealthBar healthBar;
 
@@ -99,7 +112,11 @@ public class ColorBeing : ColorObject, Shootable {
 	}
 	public void ChangeHue(float value)
 	{
-		ModeDependantCall(CmdChangeHue, OfflineChangeHue, value);
+//		ModeDependantCall(CmdChangeHue, OfflineChangeHue, value);
+		if (offlineMode)
+			OfflineChangeHue(value);
+		else
+			CmdChangeHue(value);
 	}
 
 	[ClientRpc]
@@ -114,12 +131,16 @@ public class ColorBeing : ColorObject, Shootable {
 	}
 	void GetPushed(Vector2 force)
 	{
-		ModeDependantCall(RpcGetPushed, OfflineGetPushed, force);
+//		ModeDependantCall(RpcGetPushed, OfflineGetPushed, force);
+		if (offlineMode)
+			OfflineGetPushed(force);
+		else
+			RpcGetPushed(force);
 	}
 
 	void OnHealthChanged(int health)
 	{
-		this.health = health;
+		this._health = health;
 		healthBar.UpdateBar((float)health / (float) maxHealth);
 		if (health <= 0)
 			Die();
@@ -137,7 +158,11 @@ public class ColorBeing : ColorObject, Shootable {
 	}
 	void SpawnHealthChange(int damage, float hitFactor)
 	{
-		ModeDependantCall(RpcSpawnHealthChange, OfflineSpawnHealthChange, damage, hitFactor);
+//		ModeDependantCall(RpcSpawnHealthChange, OfflineSpawnHealthChange, damage, hitFactor);
+		if (offlineMode)
+			OfflineSpawnHealthChange(damage, hitFactor);
+		else
+			RpcSpawnHealthChange(damage, hitFactor);
 	}
 
 	void Die()
@@ -174,7 +199,10 @@ public class ColorBeing : ColorObject, Shootable {
 	}   
 	void Resuscitate()
 	{ 
-		ModeDependantCall(CmdResuscitate, OfflineResuscitate);   
+		if (offlineMode)
+			OfflineResuscitate();
+		else
+			CmdResuscitate();   
 	}
 
 	void SetRenderersAlpha(float alpha, Dictionary<SpriteRenderer, float> renderersAlpha)

@@ -40,7 +40,10 @@ public class GlobalControlManager : TigglyNetworkBehaviour {
 	}
 	public void SpawnAiPlayer()
 	{
-		ModeDependantCall(CmdSpawnAiPlayer, OfflineSpawnAiPlayer);
+		if (offlineMode)
+			OfflineSpawnAiPlayer();
+		else
+			CmdSpawnAiPlayer();
 	}
 
 	public static GameObject SpawnPlayer(GameObject playerPrefab)

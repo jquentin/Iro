@@ -48,7 +48,11 @@ public class WeaponMissileLauncher : Weapon {
 	}
 	protected void Shoot (Vector2 target)
 	{
-		ModeDependantCall(CmdShoot, OfflineShoot, target);
+//		ModeDependantCall(CmdShoot, OfflineShoot, target);
+		if (offlineMode)
+			OfflineShoot(target);
+		else
+			CmdShoot(target);
 	}
 
 	[ClientRpc]
@@ -62,7 +66,11 @@ public class WeaponMissileLauncher : Weapon {
 	}
 	void PlayMissileSound()
 	{
-		ModeDependantCall(RpcPlayMissileSound, OfflinePlayMissileSound);
+//		ModeDependantCall(RpcPlayMissileSound, OfflinePlayMissileSound);
+		if (offlineMode)
+			OfflinePlayMissileSound();
+		else
+			RpcPlayMissileSound();
 	}
 
 	protected virtual void Update()

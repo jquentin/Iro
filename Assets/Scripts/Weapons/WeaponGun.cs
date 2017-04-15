@@ -59,7 +59,11 @@ public abstract class WeaponGun : Weapon {
 	}
 	void ShootingEffects()
 	{
-		ModeDependantCall(RpcShootingEffects, OfflineShootingEffects);
+//		ModeDependantCall(RpcShootingEffects, OfflineShootingEffects);
+		if (offlineMode)
+			OfflineShootingEffects();
+		else
+			RpcShootingEffects();
 	}
 
 	protected abstract void PlayShootSoundOnClients();

@@ -36,7 +36,11 @@ public class BombDropper : Weapon {
 	}
 	protected void DropBomb ()
 	{
-		ModeDependantCall(CmdDropBomb, OfflineDropBomb);
+//		ModeDependantCall(CmdDropBomb, OfflineDropBomb);
+		if (offlineMode)
+			OfflineDropBomb();
+		else
+			CmdDropBomb();
 	}
 
 	protected virtual void Update()

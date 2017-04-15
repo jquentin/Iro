@@ -67,7 +67,11 @@ public class CharacterBuilder : TigglyNetworkBehaviour {
 		{
 			if (bodies != null && bodies.Count > 0)
 				ModeDependantCall(CmdSelectBody, SelectBody);
-			ModeDependantCall(CmdSelectColor, SelectColor);
+//			ModeDependantCall(CmdSelectColor, SelectColor);
+			if (offlineMode)
+				SelectColor();
+			else
+				CmdSelectColor();
 			Camera.main.transform.parent = this.transform;
 			Camera.main.transform.localPosition = new Vector3(0f, 0f, Camera.main.transform.localPosition.z);
 			gameObject.tag = "Player";

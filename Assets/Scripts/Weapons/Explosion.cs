@@ -28,7 +28,11 @@ public class Explosion : ColorObject
 	}
 	void Init(float scale, Color color, bool playSound)
 	{
-		ModeDependantCall(RpcInit, OfflineInit, scale, color, playSound);
+//		ModeDependantCall(RpcInit, OfflineInit, scale, color, playSound);
+		if (offlineMode)
+			OfflineInit(scale, color, playSound);
+		else
+			RpcInit(scale, color, playSound);
 	}
 
 	public static void CreateExplosion(Explosion explosionPrefab, Vector2 pos, float scale, Color color, bool playSound = true)

@@ -35,7 +35,13 @@ public class ControllableColorBeing : ColorBeing {
 	}
 	void UpdateSelector(float hue)
 	{
-		ModeDependantCall(RpcUpdateSelector, OfflineUpdateSelector, hue);
+		OfflineUpdateSelector(hue);
+
+//		ModeDependantCall(RpcUpdateSelector, OfflineUpdateSelector, hue);
+//		if (offlineMode)
+//			OfflineUpdateSelector(hue);
+//		else
+//			RpcUpdateSelector(hue);
 	}
 
 	protected override void Update()

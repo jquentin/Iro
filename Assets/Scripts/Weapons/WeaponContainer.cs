@@ -34,7 +34,11 @@ public abstract class WeaponContainer : TigglyNetworkBehaviour {
 	}
 	protected void SetWeapon(int index)
 	{
-		ModeDependantCall(CmdSetWeapon, OfflineSetWeapon, index);
+//		ModeDependantCall(CmdSetWeapon, OfflineSetWeapon, index);
+		if (offlineMode)
+			OfflineSetWeapon(index);
+		else
+			CmdSetWeapon(index);
 	}
 
 	void OnChangeWeapon(int weaponIndex)

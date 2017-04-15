@@ -10,7 +10,8 @@ public class WeaponSimpleGun : WeaponGun
 	public ColorBullet largeBulletPrefab;
 
 	[SyncVar(hook="OnLargeModeChanged")]
-	public bool isLargeMode = false;
+	public bool _isLargeMode = false;
+	public bool isLargeMode { get { return _isLargeMode; } set { _isLargeMode = value; if (offlineMode) OnLargeModeChanged(value); } }
 
 	[Command]
 	void CmdSetLargeMode(bool enable)
@@ -23,7 +24,11 @@ public class WeaponSimpleGun : WeaponGun
 	} 
 	public void SetLargeMode(bool enable)
 	{
-		ModeDependantCall(CmdSetLargeMode, OfflineSetLargeMode, enable);
+//		ModeDependantCall(CmdSetLargeMode, OfflineSetLargeMode, enable);
+		if (offlineMode)
+			OfflineSetLargeMode(enable);
+		else
+			CmdSetLargeMode(enable);
 	} 
 
 	public override bool isUpgraded {
@@ -34,7 +39,7 @@ public class WeaponSimpleGun : WeaponGun
 
 	void OnLargeModeChanged(bool largeModeValue)
 	{
-		isLargeMode = largeModeValue;
+		_isLargeMode = largeModeValue;
 		WeaponButtonsContainer.instance.UpdateButtonsMode(owner);
 	}
 
@@ -60,7 +65,10 @@ public class WeaponSimpleGun : WeaponGun
 	}
 	public void Shoot ()
 	{
-		ModeDependantCall(CmdShoot, OfflineShoot);
+		if (offlineMode)
+			OfflineShoot();
+		else
+			CmdShoot();
 	}
 
 	void Update()
@@ -90,6 +98,9 @@ public class WeaponSimpleGun : WeaponGun
 	}
 	protected void PlayShootSound ()
 	{
-		ModeDependantCall(RpcPlayShootSound, OfflinePlayShootSound);
+		if (offlineMode)
+			OfflinePlayShootSound();
+		else
+			RpcPlayShootSound();
 	}
 }

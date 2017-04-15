@@ -13,7 +13,8 @@ public class WeaponMachineGun : WeaponGun {
 	float lastShotTime = float.MinValue;
 
 	[SyncVar(hook="OnStraightModeChanged")]
-	public bool isStraightMode = false;
+	public bool _isStraightMode = false;
+	public bool isStraightMode { get { return _isStraightMode; } set { _isStraightMode = value; if (offlineMode) OnStraightModeChanged(value); } }
 
 	public override bool isUpgraded {
 		get {
@@ -32,12 +33,16 @@ public class WeaponMachineGun : WeaponGun {
 	} 
 	public void SetStraightMode(bool enable)
 	{
-		ModeDependantCall(CmdSetStraightMode, OfflineSetStraightMode, enable);
+//		ModeDependantCall(CmdSetStraightMode, OfflineSetStraightMode, enable);
+		if (offlineMode)
+			OfflineSetStraightMode(enable);
+		else
+			CmdSetStraightMode(enable);
 	}
 
 	void OnStraightModeChanged(bool largeModeValue)
 	{
-		isStraightMode = largeModeValue;
+		_isStraightMode = largeModeValue;
 		WeaponButtonsContainer.instance.UpdateButtonsMode(owner);
 	}
 
@@ -61,7 +66,11 @@ public class WeaponMachineGun : WeaponGun {
 	}
 	protected void Shoot ()
 	{
-		ModeDependantCall(CmdShoot, OfflineShoot);
+//		ModeDependantCall(CmdShoot, OfflineShoot);
+		if (offlineMode)
+			OfflineShoot();
+		else
+			CmdShoot();
 	}
 
 
@@ -101,7 +110,11 @@ public class WeaponMachineGun : WeaponGun {
 	}
 	protected void PlayShootSound ()
 	{
-		ModeDependantCall(RpcPlayShootSound, OfflinePlayShootSound);
+//		ModeDependantCall(RpcPlayShootSound, OfflinePlayShootSound);
+		if (offlineMode)
+			OfflinePlayShootSound();
+		else
+			RpcPlayShootSound();
 	}
 
 }

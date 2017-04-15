@@ -12,7 +12,8 @@ public class WeaponRadiation : Weapon {
 	public Radiation radiationObject;
 
 	[SyncVar(hook="OnActiveStateChanged")]
-	public bool isActivated = false;
+	public bool _isActivated = false;
+	public bool isActivated { get { return _isActivated; } set { _isActivated = value; if (offlineMode) OnActiveStateChanged(value); } }
 
 	[NonSerialized]
 	public bool isIllimitedMode = false;
@@ -38,7 +39,11 @@ public class WeaponRadiation : Weapon {
 	}
 	protected void StartRadiate ()
 	{
-		ModeDependantCall(CmdStartRadiate, OfflineStartRadiate);
+//		ModeDependantCall(CmdStartRadiate, OfflineStartRadiate);
+		if (offlineMode)
+			OfflineStartRadiate();
+		else
+			CmdStartRadiate();
 	}
 
 	[Command]
@@ -52,12 +57,17 @@ public class WeaponRadiation : Weapon {
 	}
 	protected void StopRadiate ()
 	{
-		ModeDependantCall(CmdStopRadiate, OfflineStopRadiate);
+//		ModeDependantCall(CmdStopRadiate, OfflineStopRadiate);
+
+		if (offlineMode)
+			OfflineStopRadiate();
+		else
+			CmdStopRadiate();
 	}
 
 	void OnActiveStateChanged(bool activated)
 	{
-		this.isActivated = activated;
+		this._isActivated = activated;
 		radiationObject.gameObject.SetActive(activated);
 	}
 

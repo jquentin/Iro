@@ -44,7 +44,10 @@ public class ColorMissile : ColorObject {
 	}
 	void GoUp()
 	{
-		ModeDependantCall(RpcGoUp, OfflineGoUp);
+		if (offlineMode)
+			OfflineGoUp();
+		else
+			RpcGoUp();
 	}
 
 	void GoDown()

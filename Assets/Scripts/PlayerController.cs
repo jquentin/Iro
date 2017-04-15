@@ -19,7 +19,12 @@ public class PlayerController : TigglyNetworkBehaviour {
 	}
 	protected void SetPlayerName(string playerName)
 	{
-		ModeDependantCall(CmdSetPlayerName, OfflineSetPlayerName, playerName);
+//		ModeDependantCall(CmdSetPlayerName, OfflineSetPlayerName, playerName);
+		if (offlineMode)
+			OfflineSetPlayerName(playerName);
+		else
+			CmdSetPlayerName(playerName);
+		
 	}
 
 	public float moveSpeed = 1f;

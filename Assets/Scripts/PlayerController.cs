@@ -16,6 +16,7 @@ public class PlayerController : TigglyNetworkBehaviour {
 	void OfflineSetPlayerName(string playerName)
 	{
 		this.playerName = playerName;
+		this.name += "_" + playerName;
 	}
 	protected void SetPlayerName(string playerName)
 	{

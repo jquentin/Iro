@@ -259,9 +259,9 @@ public class ColorBeing : ColorObject, Shootable {
 		base.OnColorChangedVirtual (color);
 		if (!isLocalPlayer)
 		{
-			GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
+			GameObject playerGO = GameObject.FindGameObjectsWithTag("Player").First((GameObject arg) => arg.GetComponent<PlayerController>().isLocalPlayer);
 			if (playerGO == null) return;
-			ColorWheel playerColorWheel = playerGO.GetComponentInChildren<ColorWheel>();
+			ColorWheel playerColorWheel = playerGO.GetComponentInChildren<ColorWheel>(true);
 			if (playerColorWheel == null) return;
 			playerColorWheel.UpdateSelector(this, color.GetHue());
 		}

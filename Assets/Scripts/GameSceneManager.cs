@@ -11,10 +11,13 @@ public class GameSceneManager : MonoBehaviour {
 	GlobalControlManager controlManager;
 	NetworkManager networkManager;
 
+	NetworkIdentity[] networkIdentities;
+
 	void Awake()
 	{
 		networkManager = GameObject.FindObjectOfType<NetworkManager>();
 		controlManager = GameObject.FindObjectOfType<GlobalControlManager>();
+		networkIdentities = GameObject.FindObjectsOfType<NetworkIdentity>();
 	}
 
 	IEnumerator Start () 
@@ -29,6 +32,8 @@ public class GameSceneManager : MonoBehaviour {
 			GameObject spawnedAI3 = GlobalControlManager.SpawnPlayer(aiPlayerPrefab);
 
 			yield return new WaitForEndOfFrame();
+			foreach(NetworkIdentity ni in networkIdentities)
+				ni.gameObject.SetActive(true);
 			spawnedPlayer.gameObject.SetActive(true);
 			spawnedAI1.gameObject.SetActive(true);
 			spawnedAI2.gameObject.SetActive(true);

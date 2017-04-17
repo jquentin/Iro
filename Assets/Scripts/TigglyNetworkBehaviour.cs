@@ -6,13 +6,14 @@ using UnityEngine.Networking;
 
 public class TigglyNetworkBehaviour : NetworkBehaviour {
 
-	public static bool offlineMode = false;
+	public static bool offlineMode = true;
 
 	public bool isLocalPlayer
 	{
 		get
 		{
-			return offlineMode || base.isLocalPlayer;
+			PlayerController cc = this.transform.GetComponent<PlayerController>();
+			return (offlineMode && (cc == null || cc is IroCharacterController) ) || base.isLocalPlayer;
 		}
 	}
 	public bool isServer

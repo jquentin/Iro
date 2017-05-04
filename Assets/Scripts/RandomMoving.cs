@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomMoving : MonoBehaviour {
+public class RandomMoving : TigglyNetworkBehaviour {
 
 	public float timeBetweenPushes = 0.2f;
 
@@ -31,6 +31,8 @@ public class RandomMoving : MonoBehaviour {
 
 	void Update () 
 	{
+		if (!isServer)
+			return;
 		if (Time.time >= lastPush + timeBetweenPushes)
 		{
 			rigidbody2D.AddForce(new Vector2(Random.Range(-force, force), Random.Range(-force, force)), forceMode);

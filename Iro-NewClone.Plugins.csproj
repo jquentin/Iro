@@ -1,0 +1,421 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D04C933B-7228-5D56-0AEE-E0315F6AF1B9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+    <CompilerResponseFile></CompilerResponseFile>
+    <UnityProjectGenerator>VSTU</UnityProjectGenerator>
+    <UnityProjectType>GamePlugins:3</UnityProjectType>
+    <UnityBuildTarget>StandaloneOSXIntel64:27</UnityBuildTarget>
+    <UnityVersion>5.6.4p3</UnityVersion>
+    <RootNamespace></RootNamespace>
+    <LangVersion>4</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoConfig>true</NoConfig>
+    <NoStdLib>true</NoStdLib>
+    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\UnityVS_bin\Debug\</OutputPath>
+    <IntermediateOutputPath>Temp\UnityVS_obj\Debug\</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_5_6_4;UNITY_5_6;UNITY_5;UNITY_64;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_RUNTIME_NAVMESH_BUILDING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;ENABLE_VIDEO;UNITY_STANDALONE_OSX;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_GAMECENTER;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_VR;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_2_0_SUBSET;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE;ENABLE_VSTU;UNITY_PRO_LICENSE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\UnityVS_bin\Release\</OutputPath>
+    <IntermediateOutputPath>Temp\UnityVS_obj\Release\</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_5_6_4;UNITY_5_6;UNITY_5;UNITY_64;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_RUNTIME_NAVMESH_BUILDING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;ENABLE_VIDEO;UNITY_STANDALONE_OSX;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_GAMECENTER;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_VR;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_2_0_SUBSET;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE;ENABLE_VSTU;UNITY_PRO_LICENSE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib">
+      <HintPath>/Applications/Unity 5.6.4p3/Unity.app/Contents/Mono/lib/mono/unity/mscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>/Applications/Unity 5.6.4p3/Unity.app/Contents/Mono/lib/mono/unity/System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.XML">
+      <HintPath>/Applications/Unity 5.6.4p3/Unity.app/Contents/Mono/lib/mono/unity/System.XML.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>/Applications/Unity 5.6.4p3/Unity.app/Contents/Mono/lib/mono/unity/System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Boo.Lang">
+      <HintPath>/Applications/Unity 5.6.4p3/Unity.app/Contents/Mono/lib/mono/unity/Boo.Lang.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityScript.Lang">
+      <HintPath>/Applications/Unity 5.6.4p3/Unity.app/Contents/Mono/lib/mono/unity/UnityScript.Lang.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <HintPath>/Applications/Unity 5.6.4p3/Unity.app/Contents/Mono/lib/mono/unity/System.Runtime.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <HintPath>/Applications/Unity 5.6.4p3/Unity.app/Contents/Mono/lib/mono/unity/System.Xml.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>/Applications/Unity 5.6.4p3/Unity.app/Contents/Managed/UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>/Applications/Unity 5.6.4p3/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>/Applications/Unity 5.6.4p3/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TestRunner">
+      <HintPath>/Applications/Unity 5.6.4p3/Unity.app/Contents/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>/Applications/Unity 5.6.4p3/Unity.app/Contents/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Analytics">
+      <HintPath>/Applications/Unity 5.6.4p3/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.HoloLens">
+      <HintPath>/Applications/Unity 5.6.4p3/Unity.app/Contents/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VR">
+      <HintPath>/Applications/Unity 5.6.4p3/Unity.app/Contents/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
+    </Reference>
+    <Reference Include="BehaviorDesignerRuntime">
+      <HintPath>Assets/Behavior Designer/Runtime/BehaviorDesignerRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="Pathfinding.Ionic.Zip.Reduced">
+      <HintPath>Assets/AstarPathfindingProject/Plugins/DotNetZip/Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zlib">
+      <HintPath>Assets/Plugins/TigglyUtils/WebUtils/UnityHTTP/external/Ionic.Zlib.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>/Applications/Unity 5.6.4p3/Unity.app/Contents/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\Plugins\EasyTouchBundle\EasyTouch\Plugins\BaseFinger.cs" />
+    <Compile Include="Assets\Plugins\EasyTouchBundle\EasyTouch\Plugins\Component\EasyTouchTrigger.cs" />
+    <Compile Include="Assets\Plugins\EasyTouchBundle\EasyTouch\Plugins\ECamera.cs" />
+    <Compile Include="Assets\Plugins\EasyTouchBundle\EasyTouch\Plugins\EasyTouch.cs" />
+    <Compile Include="Assets\Plugins\EasyTouchBundle\EasyTouch\Plugins\EasyTouchInput.cs" />
+    <Compile Include="Assets\Plugins\EasyTouchBundle\EasyTouch\Plugins\Finger.cs" />
+    <Compile Include="Assets\Plugins\EasyTouchBundle\EasyTouch\Plugins\Gesture.cs" />
+    <Compile Include="Assets\Plugins\EasyTouchBundle\EasyTouch\Plugins\TwoFingerGesture.cs" />
+    <Compile Include="Assets\Plugins\EasyTouchBundle\EasyTouchControls\Plugins\ComponentExtensions.cs" />
+    <Compile Include="Assets\Plugins\EasyTouchBundle\EasyTouchControls\Plugins\ETCArea.cs" />
+    <Compile Include="Assets\Plugins\EasyTouchBundle\EasyTouchControls\Plugins\ETCAxis.cs" />
+    <Compile Include="Assets\Plugins\EasyTouchBundle\EasyTouchControls\Plugins\ETCBase.cs" />
+    <Compile Include="Assets\Plugins\EasyTouchBundle\EasyTouchControls\Plugins\ETCButton.cs" />
+    <Compile Include="Assets\Plugins\EasyTouchBundle\EasyTouchControls\Plugins\ETCDPad.cs" />
+    <Compile Include="Assets\Plugins\EasyTouchBundle\EasyTouchControls\Plugins\ETCInput.cs" />
+    <Compile Include="Assets\Plugins\EasyTouchBundle\EasyTouchControls\Plugins\ETCJoystick.cs" />
+    <Compile Include="Assets\Plugins\EasyTouchBundle\EasyTouchControls\Plugins\ETCSingleton.cs" />
+    <Compile Include="Assets\Plugins\EasyTouchBundle\EasyTouchControls\Plugins\ETCTouchPad.cs" />
+    <Compile Include="Assets\Plugins\EasyTouchUtils\EasyTouchFacade.cs" />
+    <Compile Include="Assets\Plugins\GoogleAnalyticsV3\Attributes\RangedTooltipAttribute.cs" />
+    <Compile Include="Assets\Plugins\GoogleAnalyticsV3\Attributes\TooltipAttribute.cs" />
+    <Compile Include="Assets\Plugins\GoogleAnalyticsV3\Field.cs" />
+    <Compile Include="Assets\Plugins\GoogleAnalyticsV3\Fields.cs" />
+    <Compile Include="Assets\Plugins\GoogleAnalyticsV3\GAIHandler.cs" />
+    <Compile Include="Assets\Plugins\GoogleAnalyticsV3\GoogleAnalyticsAndroidV3.cs" />
+    <Compile Include="Assets\Plugins\GoogleAnalyticsV3\GoogleAnalyticsMPV3.cs" />
+    <Compile Include="Assets\Plugins\GoogleAnalyticsV3\GoogleAnalyticsV3.cs" />
+    <Compile Include="Assets\Plugins\GoogleAnalyticsV3\GoogleAnalyticsiOSV3.cs" />
+    <Compile Include="Assets\Plugins\GoogleAnalyticsV3\HitBuilders\AppViewHitBuilder.cs" />
+    <Compile Include="Assets\Plugins\GoogleAnalyticsV3\HitBuilders\EventHitBuilder.cs" />
+    <Compile Include="Assets\Plugins\GoogleAnalyticsV3\HitBuilders\ExceptionHitBuilder.cs" />
+    <Compile Include="Assets\Plugins\GoogleAnalyticsV3\HitBuilders\HitBuilder.cs" />
+    <Compile Include="Assets\Plugins\GoogleAnalyticsV3\HitBuilders\ItemHitBuilder.cs" />
+    <Compile Include="Assets\Plugins\GoogleAnalyticsV3\HitBuilders\SocialHitBuilder.cs" />
+    <Compile Include="Assets\Plugins\GoogleAnalyticsV3\HitBuilders\TimingHitBuilder.cs" />
+    <Compile Include="Assets\Plugins\GoogleAnalyticsV3\HitBuilders\TransactionHitBuilder.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\LanguageSelection.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\TypewriterEffect.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIButton.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIButtonActivate.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIButtonColor.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIButtonKeys.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIButtonMessage.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIButtonOffset.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIButtonRotation.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIButtonScale.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UICenterOnChild.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UICenterOnClick.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIDragCamera.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIDragDropContainer.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIDragDropItem.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIDragDropRoot.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIDragObject.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIDragResize.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIDragScrollView.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIDraggableCamera.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIEventTrigger.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIForwardEvents.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIGrid.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIImageButton.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIKeyBinding.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIKeyNavigation.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIPlayAnimation.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIPlaySound.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIPlayTween.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIPopupList.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIProgressBar.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UISavedOption.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIScrollBar.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIScrollView.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UISlider.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UISoundVolume.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UITable.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIToggle.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIToggledComponents.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIToggledObjects.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIWidgetContainer.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Interaction\UIWrapContent.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\ActiveAnimation.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\AnimationOrTween.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\BMFont.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\BMGlyph.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\BMSymbol.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\BetterList.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\ByteReader.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\EventDelegate.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\Localization.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\NGUIDebug.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\NGUIMath.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\NGUIText.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\NGUITools.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\PropertyBinding.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\PropertyReference.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\RealTime.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\SpringPanel.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\UIBasicSprite.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\UIDrawCall.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\UIEventListener.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\UIGeometry.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\UIRect.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\UISnapshotPoint.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Internal\UIWidget.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Tweening\AnimatedAlpha.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Tweening\AnimatedColor.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Tweening\SpringPosition.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Tweening\TweenAlpha.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Tweening\TweenColor.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Tweening\TweenFOV.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Tweening\TweenHeight.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Tweening\TweenOrthoSize.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Tweening\TweenPosition.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Tweening\TweenRotation.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Tweening\TweenScale.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Tweening\TweenTransform.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Tweening\TweenVolume.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Tweening\TweenWidth.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\Tweening\UITweener.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\UI\UI2DSprite.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\UI\UI2DSpriteAnimation.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\UI\UIAnchor.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\UI\UIAtlas.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\UI\UICamera.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\UI\UIFont.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\UI\UIInput.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\UI\UILabel.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\UI\UILocalize.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\UI\UIOrthoCamera.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\UI\UIPanel.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\UI\UIRoot.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\UI\UISprite.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\UI\UISpriteAnimation.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\UI\UISpriteData.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\UI\UIStretch.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\UI\UITextList.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\UI\UITexture.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\UI\UITooltip.cs" />
+    <Compile Include="Assets\Plugins\NGUI\Scripts\UI\UIViewport.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\AnimatorAudio.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\AnimatorAudioPack.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\AnimatorDestroy.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\AnimatorExtensions.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\ChangeLayer.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\OrientedToDirection.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\RandomDirection.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\ResetParentPosition.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\StateMachineBehaviourScripts\SetRandomVariant.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\SubAnimationTrigger.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\SwapPositions.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\SwitchBodyPart.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\TweenLoops\ActivationLoop.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\TweenLoops\FlipLoop.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\TweenLoops\RotationLoop.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\TweenLoops\ScaleLoop.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\TweenLoops\TranslationLoop.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\TweenLoops\TweenLoop.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\Tweenable\AlphaTweenable.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\Tweenable\ColorTweenable.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\Tweenable\PositionTweenable.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\Tweenable\RotationTweenable.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\Tweenable\ScaleTweenable.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\Tweenable\SizeTweenable.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\Tweenable\Tweenable.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AnimationsUtils\Tweenable\VolumeTweenable.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AppsUtils\BackButton\BackButtonClickButton.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AppsUtils\BackButton\BackButtonETClickButton.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AppsUtils\BackButton\BackButtonHandler.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AppsUtils\BackButton\BackButtonQuit.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AppsUtils\BackButton\BackButtonUGUIButtonClick.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AppsUtils\PlatformDependant\PlatformDependant.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AppsUtils\StoreDemo\CloseApp.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AppsUtils\StoreDependant\StoreDependantActiveState.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AppsUtils\StoreDependant\StoreDependantActiveStateSingleTarget.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AppsUtils\StoreSelection.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AppsUtils\TigglyConstants.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AppsUtils\ToyDependant\ToyDependantActiveState.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AppsUtils\ToyDependant\ToyDependantAtlas.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AppsUtils\ToyDependant\ToyDependantColor.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AppsUtils\ToyDependant\ToyDependantTexture.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AudioUtils\AudioManager.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AudioUtils\AudioSourceType.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AudioUtils\AudioUtils.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AudioUtils\HingeJointAudio.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AudioUtils\StartLoopEndPlayer.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\AudioUtils\UserSettings.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\CollectionUtils\CollectionUtils.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\ColliderUtils\CollisionEventDispatcher.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\ColliderUtils\EnclosingColliders.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\ColliderUtils\TriggerEnterExitEventDispatcher.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\DeviceUtils\DeviceUtils.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\DeviceUtils\ScaleToScreenSize.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\GAUtils\GAConstants.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\GAUtils\GASingleton.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\GAUtils\SessionCounter.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\GlobalUtils\ColorUtils.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\GlobalUtils\GlobalUtils.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\GlobalUtils\MonoSingleton.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\GlobalUtils\PersistentMonoSingleton.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\GlobalUtils\ResourcePrefabMonoSingleton.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\GlobalUtils\StringUtils.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\GlobalUtils\TigglyMonoBehaviour.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\InteractionUtils\EventListener.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\InteractionUtils\TwoStepsButton.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\LocalizationUtils\BilingualLocalizableAudioClip.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\LocalizationUtils\LocalizableAudioClip.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\LocalizationUtils\Localize3DText.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\LocalizationUtils\LocalizeActivation.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\LocalizationUtils\LocalizeActivationCustomKey.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\LocalizationUtils\LocalizeActivationRomanNonRoman.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\LocalizationUtils\LocalizeComponent.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\LocalizationUtils\LocalizeTMP.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\LocalizationUtils\LocalizeUGUIText.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\LocalizationUtils\LocalizeUITexture.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\LocalizationUtils\SecondaryGlowController.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\LocalizationUtils\SecondaryLocalization.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\MathUtils\MathUtils.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\NGUIUtils\AnchorInitializer.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\NGUIUtils\AtlasChangeableUI.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\NGUIUtils\CancelPhysicalSizeEnforcer.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\NGUIUtils\ColorizedUI.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\NGUIUtils\DisplayManager.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\NGUIUtils\DisplaySize.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\NGUIUtils\NGUIUtils.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\NGUIUtils\UIPlaySoundWithObeyToSFXEnabled.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\NGUIUtils\UIRootFixedPhysicalSizeEnforcer.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\PersistenceUtils\PersistentBool.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\PersistenceUtils\PersistentInt.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\PersistenceUtils\PersistentType.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\PersistenceUtils\TestPersistentBool.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\PhysicsUtils\LayerMaskUtils.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\RandomUtils\RandomExhaust.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\RandomUtils\RandomSpawnArea.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\RandomUtils\RandomSpawnAreaCollider2D.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\RandomUtils\RandomSpawnAreaMonoBehavior.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\RandomUtils\RandomSpawnAreaTransformBounds.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\RandomUtils\RandomUtils.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\ReflectionUtils\ReflectionUtils.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\SceneUtils\SceneTransition\TransitionFade\TransitionFade.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\SceneUtils\SceneTransition\TransitionFade\TransitionFadeElement.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\SceneUtils\SceneTransition\TransitionFade\TransitionFadeElementSprite.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\SceneUtils\SceneTransition\TransitionScene\TransitionScene.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\SpriteRendererUtils\SlicedSpriteRenderer.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\TimeUtils\GameTimeout.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\TimeUtils\StaticCoroutineHandler.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\TimeUtils\TimeUtils.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\TimeUtils\WaitForSecondsOrUntil.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\TimeUtils\WaitForSecondsWhile.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\TransformUtils\TransformUtils.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\WebUtils\DistantLabel.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\WebUtils\DistantLocalizedLabel.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\WebUtils\DownloadableTexture.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\WebUtils\EmailComposer.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\WebUtils\EmailRegistrationInput.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\WebUtils\InternetReachabilityChecker.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\WebUtils\JSONUtils.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\WebUtils\SimpleJSON.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\WebUtils\TigglyEmailRegistration.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\WebUtils\UnityHTTP\CookieJar.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\WebUtils\UnityHTTP\DiskCache.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\WebUtils\UnityHTTP\Request.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\WebUtils\UnityHTTP\Response.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\WebUtils\UnityHTTP\ResponseCallbackDispatcher.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\WebUtils\UnityHTTP\external\JSON.cs" />
+    <Compile Include="Assets\Plugins\TigglyUtils\WebUtils\WebUtils.cs" />
+    <Compile Include="Assets\Plugins\iTween\iTween.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\AppConstants_autogenerated\Resources\AppCode.txt" />
+    <None Include="Assets\AppConstants_autogenerated\Resources\AppVersion.txt" />
+    <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh.shader" />
+    <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\NavmeshOutline.shader" />
+    <None Include="Assets\AstarPathfindingProject\ExampleScenes\Materials\DiffuseAlwaysVisible.shader" />
+    <None Include="Assets\AstarPathfindingProject\ExampleScenes\Materials\Projector Light.shader" />
+    <None Include="Assets\AstarPathfindingProject\ExampleScenes\Materials\Projector Multiply.shader" />
+    <None Include="Assets\AstarPathfindingProject\ExampleScenes\_Example Scenes.txt" />
+    <None Include="Assets\AstarPathfindingProject\Plugins\DotNetZip\DotNetZipLicense.txt" />
+    <None Include="Assets\AstarPathfindingProject\Plugins\dependencies.txt" />
+    <None Include="Assets\AstarPathfindingProject\Readme.txt" />
+    <None Include="Assets\AstarPathfindingProject\Readme_upgrading.txt" />
+    <None Include="Assets\AstarPathfindingProject\link.xml" />
+    <None Include="Assets\Behavior Designer\Editor\GridShader.shader" />
+    <None Include="Assets\Plugins\EasyTouchBundle\EasyTouch\RealseNotes.txt" />
+    <None Include="Assets\Plugins\EasyTouchBundle\EasyTouchControls\Readme.txt" />
+    <None Include="Assets\Plugins\EasyTouchBundle\EasyTouchControls\ReleaseNotes.txt" />
+    <None Include="Assets\Plugins\EasyTouchBundle\Readme.txt" />
+    <None Include="Assets\Plugins\NGUI\ReadMe - 3.6.8.txt" />
+    <None Include="Assets\Plugins\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 1.shader" />
+    <None Include="Assets\Plugins\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 2.shader" />
+    <None Include="Assets\Plugins\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 3.shader" />
+    <None Include="Assets\Plugins\NGUI\Resources\Shaders\Unlit - Premultiplied Colored.shader" />
+    <None Include="Assets\Plugins\NGUI\Resources\Shaders\Unlit - Text 1.shader" />
+    <None Include="Assets\Plugins\NGUI\Resources\Shaders\Unlit - Text 2.shader" />
+    <None Include="Assets\Plugins\NGUI\Resources\Shaders\Unlit - Text 3.shader" />
+    <None Include="Assets\Plugins\NGUI\Resources\Shaders\Unlit - Text.shader" />
+    <None Include="Assets\Plugins\NGUI\Resources\Shaders\Unlit - Transparent Colored 1.shader" />
+    <None Include="Assets\Plugins\NGUI\Resources\Shaders\Unlit - Transparent Colored 2.shader" />
+    <None Include="Assets\Plugins\NGUI\Resources\Shaders\Unlit - Transparent Colored 3.shader" />
+    <None Include="Assets\Plugins\NGUI\Resources\Shaders\Unlit - Transparent Colored.shader" />
+    <None Include="Assets\Plugins\NGUI\Resources\Shaders\Unlit - Transparent Packed 1.shader" />
+    <None Include="Assets\Plugins\NGUI\Resources\Shaders\Unlit - Transparent Packed 2.shader" />
+    <None Include="Assets\Plugins\NGUI\Resources\Shaders\Unlit - Transparent Packed 3.shader" />
+    <None Include="Assets\Plugins\NGUI\Resources\Shaders\Unlit - Transparent Packed.shader" />
+    <None Include="Assets\Plugins\NGUI\TigglyReadMe.txt" />
+    <None Include="Assets\Plugins\TigglyUtils\GAUtils\ReadMe.txt" />
+    <None Include="Assets\Plugins\TigglyUtils\LocalizationUtils\ReadMe.txt" />
+    <None Include="Assets\Plugins\TigglyUtils\ReflectionUtils\ReadMe.txt" />
+    <None Include="Assets\Plugins\TigglyUtils\WebUtils\ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="GenerateTargetFrameworkMonikerAttribute" />
+</Project>
